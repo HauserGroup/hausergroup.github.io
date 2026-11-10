@@ -1,0 +1,15 @@
+name: Website change request
+description: Ask for something on the website to be added, changed or removed.
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Which page is this about? A link or the page name is fine.
+  - type: textarea
+    id: change
+    attributes:
+      label: What should change?
+      description: Include any text, links or images that should go on the page.
+    validations:
+      required: true
