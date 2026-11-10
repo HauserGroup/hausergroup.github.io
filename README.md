@@ -14,6 +14,8 @@ npm run dev
 
 The site is then at <http://localhost:4321> and reloads as you edit.
 `npm run build` builds the production site into `dist/`.
+`npm run format` formats your changes with Prettier. The **Build site** check
+fails on unformatted files, so run it before you push.
 
 ## Where things live
 
@@ -21,8 +23,8 @@ The site is then at <http://localhost:4321> and reloads as you edit.
 - `public/` — files served as-is, such as images and PDFs.
 - `astro.config.mjs` — site configuration.
 
-VS Code will suggest the Astro extension when you open the folder; install it for
-syntax highlighting and autocomplete in `.astro` files.
+VS Code will suggest the Astro and Prettier extensions when you open the folder;
+install them for autocomplete in `.astro` files and formatting from the editor.
 
 ## Making changes
 

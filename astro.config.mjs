@@ -1,5 +1,5 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://hausergroup.github.io',
+  site: "https://hausergroup.github.io",
 });
