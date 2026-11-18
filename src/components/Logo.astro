@@ -1,0 +1,38 @@
+---
+// Seven tilted bars: the seven helices of a G protein-coupled receptor.
+interface Props {
+  width?: number;
+}
+const { width = 34 } = Astro.props;
+const bars = [
+  { fill: "#1E4FC2", angle: -8 },
+  { fill: "#F6C51B", angle: 6 },
+  { fill: "#D92D1C", angle: -4 },
+  { fill: "#178553", angle: 9 },
+  { fill: "#1E4FC2", angle: -6 },
+  { fill: "#D92D1C", angle: 4 },
+  { fill: "#F6C51B", angle: -10 },
+];
+---
+
+<svg
+  width={width}
+  height={(width * 24) / 34}
+  viewBox="0 0 44 34"
+  aria-hidden="true"
+>
+  {bars.map((bar, i) => {
+    const x = 1 + i * 6.3;
+    return (
+      <rect
+        x={x}
+        y="3"
+        width="4.5"
+        height="28"
+        rx="2.25"
+        fill={bar.fill}
+        transform={`rotate(${bar.angle} ${x + 2.25} 17)`}
+      />
+    );
+  })}
+</svg>

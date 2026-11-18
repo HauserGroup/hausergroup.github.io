@@ -1,12 +1,25 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Page not found</title>
-  </head>
-  <body>
-    <h1>Page not found</h1>
-    <p>
-      <a href="/">Go to the homepage</a>
-    </p>
-  </body>
-</html>
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Page not found · Hauser Group">
+  <section class="wrap lost">
+    <div class="panel dots r">
+      <h1>Page Not Found</h1>
+      <div class="win">
+        <div class="win-bar">
+          404.txt<span class="stripes"></span>
+        </div>
+        <div class="win-body">
+          There is nothing at this address. It may have moved, or the link may
+          have a typo.
+          <br />
+          <br />
+          <a class="btn" href="/">
+            Go to the homepage
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

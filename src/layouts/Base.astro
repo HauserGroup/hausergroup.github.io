@@ -1,0 +1,70 @@
+---
+import "../styles/site.css";
+import Logo from "../components/Logo.astro";
+import { GROUP_PAGE } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Hauser Group · Pharmacoinformatics",
+  description = "The Hauser Group studies how human genetic variation changes the way G protein-coupled receptors respond to drugs. Department of Drug Design and Pharmacology, University of Copenhagen.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="wrap top">
+      <a class="mark" href="/">
+        <Logo />
+        Hauser Group
+      </a>
+      <div class="top-right">
+        <nav aria-label="Main">
+          <a href="/#mission">Mission</a>
+          <a href="/#research">Research</a>
+          <a href="/#software">Software</a>
+          <a href="/#people">People</a>
+        </nav>
+        <a class="btn" href={GROUP_PAGE}>
+          Group page at UCPH{" "}
+          <span class="arr" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <slot />
+    </main>
+
+    <footer class="wrap foot cap">
+      <span>Hauser Group · Pharmacoinformatics</span>
+      <span>
+        Department of Drug Design and Pharmacology, University of Copenhagen
+      </span>
+    </footer>
+  </body>
+</html>
