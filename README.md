@@ -20,8 +20,14 @@ fails on unformatted files, so run it before you push.
 ## Where things live
 
 - `src/pages/` — one file per page. `src/pages/people.astro` becomes `/people`.
+- `src/data/site.ts` — people, research lines and other content lists.
+- `src/layouts/Base.astro` — the page head, header and footer.
+- `src/styles/site.css` — colors, type and components.
+- `src/components/` — the logo and the receptor drawing.
 - `public/` — files served as-is, such as images and PDFs.
 - `astro.config.mjs` — site configuration.
+- `design/DESIGN.md` — the design choices behind the site. Read it before
+  changing how things look.
 
 VS Code will suggest the Astro and Prettier extensions when you open the folder;
 install them for autocomplete in `.astro` files and formatting from the editor.
