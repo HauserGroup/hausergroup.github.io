@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+interface Props {
+  title: string;
+  tone?: string;
+}
+const { title, tone = "b" } = Astro.props;
+---
+
+<Base title={title + " · Hauser Group"}>
+  <div class:list={["wrap", "directory-page", tone]}>
+    <header class="directory-heading">
+      <h1>{title}</h1>
+    </header>
+    <slot />
+  </div>
+</Base>

@@ -1,0 +1,48 @@
+---
+import CategoryPage from "../components/CategoryPage.astro";
+import { emailLink } from "../data/contact";
+const options = [
+  [
+    "Current positions",
+    "Find advertised PhD and postdoctoral positions on the University of Copenhagen job portal. Each listing has its own deadline and application form.",
+    "Browse UCPH vacancies",
+    "https://employment.ku.dk/all-vacancies/",
+    "b",
+  ],
+  [
+    "Visit the lab",
+    "Interested in spending a research period abroad in Copenhagen? Tell us where you study or work, your preferred dates and the question you would like to explore.",
+    "Enquire about a visit",
+    emailLink("Research visit in Copenhagen"),
+    "g",
+  ],
+  [
+    "Thesis projects",
+    "Get in touch about an MSc or exchange project in computational biology or experimental pharmacology. Include your programme and the methods you would like to learn.",
+    "Discuss a thesis project",
+    emailLink("Thesis or exchange project"),
+    "y",
+  ],
+  [
+    "Collaborate",
+    "Have a dataset, assay or modelling question that overlaps with our work? Send a short description of the project and what you would like to do together.",
+    "Start a collaboration",
+    emailLink("Research collaboration"),
+    "r",
+  ],
+];
+---
+
+<CategoryPage title="Work With Us" tone="y">
+  <div class="option-grid">
+    {options.map(([title, body, label, href, color]) => (
+      <article class:list={["option", color]}>
+        <h2>{title}</h2>
+        <p>{body}</p>
+        <a class="text-link" href={href}>
+          {label} <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+    ))}
+  </div>
+</CategoryPage>

@@ -1,0 +1,42 @@
+---
+import CategoryPage from "../components/CategoryPage.astro";
+import { GROUP_PAGE } from "../data/site";
+import { groupEmail, emailLink } from "../data/contact";
+---
+
+<CategoryPage title="Contact Us" tone="r">
+  <div class="option-grid">
+    <article class="option r">
+      <h2>Contact the group</h2>
+      <p>
+        <a href="/people/alexander-hauser/">Alexander Sebastian Hauser</a>
+        <br />
+        Group leader
+      </p>
+      <a class="text-link" href={emailLink("Hauser Group enquiry")}>
+        {groupEmail}
+      </a>
+      <a href="/people/">Find a group member →</a>
+    </article>
+    <article class="option b">
+      <h2>Find us in Copenhagen</h2>
+      <address>
+        Department of Drug Design and Pharmacology
+        <br />
+        University of Copenhagen
+        <br />
+        Universitetsparken 2<br />
+        2100 Copenhagen, Denmark
+      </address>
+      <a
+        class="text-link"
+        href="https://www.google.com/maps/search/?api=1&amp;query=Universitetsparken+2%2C+2100+Copenhagen%2C+Denmark"
+      >
+        Open in Maps ↗
+      </a>
+      <a class="text-link" href={GROUP_PAGE}>
+        Group page at UCPH ↗
+      </a>
+    </article>
+  </div>
+</CategoryPage>

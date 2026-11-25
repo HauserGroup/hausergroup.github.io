@@ -1,18 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
-import Receptor from "../components/Receptor.astro";
-import { GROUP_PAGE, people, research, scales, scaleNames } from "../data/site";
-
-const sequence = [
-  { aa: "I", pos: "3.46" },
-  { aa: "A", pos: "3.47" },
-  { aa: "V", pos: "3.48" },
-  { aa: "D", pos: "3.49" },
-  { aa: "C", pos: "R3.50C", swap: true },
-  { aa: "Y", pos: "3.51" },
-  { aa: "L", pos: "3.52" },
-  { aa: "A", pos: "3.53" },
-];
+import ParticleReceptor from "../components/ParticleReceptor.astro";
+import Mission from "../components/Mission.astro";
+import Scales from "../components/Scales.astro";
+import ResearchLines from "../components/ResearchLines.astro";
+import Software from "../components/Software.astro";
+import LatestPapers from "../components/LatestPapers.astro";
+import PeopleSection from "../components/PeopleSection.astro";
+import { GROUP_PAGE } from "../data/site";
 ---
 
 <Base>
@@ -35,7 +30,7 @@ const sequence = [
           <b>34%</b>of approved drugs act on a G protein-coupled receptor.
         </div>
       </div>
-      <Receptor />
+      <ParticleReceptor />
       <h1>Every Genome Reads The Same Drug Differently</h1>
     </div>
     <p class="cap accent">
@@ -44,251 +39,26 @@ const sequence = [
     </p>
   </section>
 
-  <section class="wrap mission" id="mission">
-    <p class="cap">Mission</p>
-    <p class="say">
-      We integrate large biomedical data in genomics, structural biology,
-      pharmacology and health care with new computational methods,{" "}
-      <span>
-        to find novel drug targets and reveal the principles that run biological
-        systems.
-      </span>
-    </p>
-  </section>
+  <Mission />
 
-  <section class="wrap scales">
-    <div class="head">
-      <h2>From One Residue To One Patient</h2>
-      <p>
-        One swapped amino acid can change how well a drug works, or which
-        pathway it switches on. We follow that change through four scales.
-      </p>
-    </div>
-    <div
-      class="seq"
-      aria-label="Illustrative stretch of helix 3 with one residue replaced by a variant"
-    >
-      {sequence.map((r) => (
-        <div class:list={["res", { swap: r.swap }]}>
-          <b>{r.aa}</b>
-          <small>{r.pos}</small>
-        </div>
-      ))}
-    </div>
-    <p class="cap seq-cap">
-      Helix 3 around the DRY motif. Illustrative sequence.
-    </p>
-    <div class="wins">
-      {scales.map((s) => (
-        <div class:list={["win", s.color]}>
-          <div class="win-bar">
-            {s.id}
-            <i />
-          </div>
-          <div class="win-body">
-            {s.text}
-            <span>{s.tools}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
+  <LatestPapers />
 
-  <section class="research" id="research">
-    <div class="wrap">
-      <div class="head">
-        <h2>Three Lines Of Work</h2>
-        <p>Every project mixes computation and the wet lab.</p>
-      </div>
-      <div class="works">
-        {research.map((w) => (
-          <article class="work">
-            <div class:list={["tile", "dots", w.color]}>
-              <i class="obj" style={w.shape} />
-            </div>
-            <h3>{w.title}</h3>
-            <p>{w.text}</p>
-            <div class="reach">
-              {scaleNames.map((name) => (
-                <span class:list={{ on: w.reach.includes(name) }}>{name}</span>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Scales />
 
-  <section class="wrap software" id="software">
-    <div class="head">
-      <h2>Software</h2>
-      <p>Open-source tools we build and use in our own analyses.</p>
-    </div>
-    <div class="tools">
-      <article class="tool">
-        <div class="tile dots b">
-          <svg
-            viewBox="0 0 320 240"
-            role="img"
-            aria-label="Dose–response curve fitted through data points"
-          >
-            <path
-              d="M30 20 V210 H305"
-              fill="none"
-              stroke="#17171A"
-              stroke-width="1.5"
-            ></path>
-            <path
-              d="M30 196 C100 196 140 180 165 120 S230 44 300 44"
-              fill="none"
-              stroke="#17171A"
-              stroke-width="3"
-            ></path>
-            <g fill="#1E4FC2" stroke="#17171A" stroke-width="1.5">
-              <circle cx="45" cy="192" r="6"></circle>
-              <circle cx="75" cy="188" r="6"></circle>
-              <circle cx="105" cy="183" r="6"></circle>
-              <circle cx="135" cy="162" r="6"></circle>
-              <circle cx="165" cy="118" r="6"></circle>
-              <circle cx="195" cy="78" r="6"></circle>
-              <circle cx="225" cy="58" r="6"></circle>
-              <circle cx="255" cy="49" r="6"></circle>
-              <circle cx="285" cy="46" r="6"></circle>
-            </g>
-            <g
-              font-family="IBM Plex Mono, monospace"
-              font-size="11"
-              fill="#6A6A70"
-            >
-              <text x="305" y="230" text-anchor="end">
-                log [drug]
-              </text>
-              <text x="36" y="16">
-                response
-              </text>
-            </g>
-          </svg>
-        </div>
-        <div class="tool-text">
-          <p class="cap">Open source · Rust</p>
-          <h3>CurveBook</h3>
-          <p>
-            Biostatistics, nonlinear curve fitting and scientific graphs,
-            written from scratch in Rust. Data, analyses, graphs, layouts and
-            notes stay together in one <code>.curvebook</code> file you can send
-            to a collaborator.
-          </p>
-          <div class="facts">
-            <span>alpha</span>
-            <span>MCP + command line</span>
-            <span>GUI in development</span>
-          </div>
-          <a class="btn lg" href="https://hausergroup.github.io/curvebook/">
-            Visit CurveBook{" "}
-            <span class="arr" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </div>
-      </article>
+  <ResearchLines />
 
-      <article class="tool">
-        <div class="tile dots y">
-          <svg
-            viewBox="0 0 320 240"
-            role="img"
-            aria-label="OPLS-DA score plot with two groups separated along the predictive component"
-          >
-            <path
-              d="M160 20 V220 M20 120 H300"
-              fill="none"
-              stroke="#17171A"
-              stroke-width="1.5"
-              stroke-dasharray="4 5"
-            ></path>
-            <g fill="#fff" stroke="#17171A" stroke-width="2">
-              <circle cx="80" cy="90" r="7"></circle>
-              <circle cx="98" cy="140" r="7"></circle>
-              <circle cx="70" cy="125" r="7"></circle>
-              <circle cx="110" cy="105" r="7"></circle>
-              <circle cx="92" cy="170" r="7"></circle>
-              <circle cx="65" cy="75" r="7"></circle>
-              <circle cx="118" cy="152" r="7"></circle>
-              <circle cx="86" cy="112" r="7"></circle>
-            </g>
-            <g fill="#F6C51B" stroke="#17171A" stroke-width="2">
-              <rect x="203" y="73" width="14" height="14"></rect>
-              <rect x="225" y="128" width="14" height="14"></rect>
-              <rect x="238" y="93" width="14" height="14"></rect>
-              <rect x="213" y="153" width="14" height="14"></rect>
-              <rect x="191" y="111" width="14" height="14"></rect>
-              <rect x="248" y="138" width="14" height="14"></rect>
-              <rect x="231" y="63" width="14" height="14"></rect>
-              <rect x="208" y="98" width="14" height="14"></rect>
-            </g>
-            <g
-              font-family="IBM Plex Mono, monospace"
-              font-size="11"
-              fill="#6A6A70"
-            >
-              <text x="305" y="236" text-anchor="end">
-                t[1] predictive
-              </text>
-              <text x="166" y="16">
-                to[1] orthogonal
-              </text>
-            </g>
-          </svg>
-        </div>
-        <div class="tool-text">
-          <p class="cap">Open source · Python</p>
-          <h3>scikit-opls</h3>
-          <p>
-            OPLS and OPLS-DA with a scikit-learn interface. It splits the
-            variation in X into a part that predicts y and an orthogonal part
-            that doesn't, then fits PLS on the cleaned data. Includes O2PLS, VIP
-            scores, S-plots and permutation tests, and works inside{" "}
-            <code>Pipeline</code> and <code>GridSearchCV</code>.
-          </p>
-          <div class="facts">
-            <span>v0.2.0</span>
-            <span>OPLS · OPLS-DA · O2PLS</span>
-            <span>scikit-learn compatible</span>
-          </div>
-          <a class="btn lg y" href="https://hausergroup.github.io/scikit-opls/">
-            Visit scikit-opls{" "}
-            <span class="arr" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </div>
-      </article>
-    </div>
-  </section>
+  <Software />
 
-  <section class="wrap people" id="people">
-    <div class="head">
-      <h2>People</h2>
-      <p>Computational biologists, pharmacologists and data scientists.</p>
-    </div>
-    <div class="crew">
-      {people.map((p) => (
-        <article class="person">
-          <div class:list={["face", "dots", p.color]} aria-hidden="true">
-            <b>{p.initials}</b>
-          </div>
-          <div>
-            <p class="name">{p.name}</p>
-            <p class="cap">{p.title}</p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
+  <PeopleSection />
 
   <section class="wrap" id="join">
     <div class="panel dots y">
-      <h2>Work With Us</h2>
+      <div class="join-heading">
+        <h2>Work With Us</h2>
+        <a class="text-link" href="/opportunities/">
+          Positions and research visits <span aria-hidden="true">→</span>
+        </a>
+      </div>
       <div class="win">
         <div class="win-bar">
           join.txt<span class="stripes"></span>

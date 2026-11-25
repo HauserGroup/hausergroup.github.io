@@ -1,0 +1,43 @@
+---
+interface Props {
+  src?: string;
+  initials: string;
+  eager?: boolean;
+}
+const { src, initials, eager = false } = Astro.props;
+---
+
+{src ? (
+  <img
+    src={src}
+    alt=""
+    width="640"
+    height="640"
+    loading={eager ? "eager" : "lazy"}
+  />
+) : (
+  <span class="initials" aria-hidden="true">
+    {initials}
+  </span>
+)}
+<style>
+  img,
+  .initials {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    display: block;
+  }
+  img {
+    object-fit: cover;
+    object-position: 50% 32%;
+  }
+  .initials {
+    display: grid;
+    place-items: center;
+    background: var(--t);
+    color: var(--ink);
+    font: 500 clamp(2rem, 5.8vw, 5.8rem)/1 var(--f-sans);
+    letter-spacing: -0.065em;
+  }
+</style>

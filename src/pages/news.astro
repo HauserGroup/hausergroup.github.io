@@ -1,0 +1,82 @@
+---
+import CategoryPage from "../components/CategoryPage.astro";
+
+const stories = [
+  {
+    date: "2026-09-17",
+    displayDate: "17 Sep 2026",
+    source: "Lundbeck Foundation · Member list (PDF)",
+    title: "Marin Matic joins the Lundbeck Foundation Investigator Network",
+    href: "https://lundbeckfonden.com/files/media/document/LFIN%20Members.pdf",
+  },
+  {
+    date: "2026-09-03",
+    displayDate: "3 Sep 2026",
+    source: "University of Copenhagen",
+    title:
+      "ERC Starting Grant funds DARK-PEP, the lab’s study of how human peptide variation affects GPCR signalling",
+    href: "https://drug.ku.dk/news/news-2026/decoding-natures-peptides-to-design-the-medicines-of-tomorrow/",
+  },
+  {
+    date: "2026-04-21",
+    displayDate: "21 Apr 2026",
+    source: "Lundbeck Foundation",
+    title:
+      "Marin Matic receives a Lundbeck Foundation postdoctoral fellowship for NeuroPepX, an AI platform for discovering bioactive neuropeptides",
+    href: "https://lundbeckfonden.com/en/neuropepx-a-modular-ai-platform-bioactive-neuropeptide-discovery",
+  },
+  {
+    date: "2025-12-02",
+    displayDate: "2 Dec 2025",
+    source: "EMBO",
+    title: "Alexander Hauser named an EMBO Young Investigator",
+    href: "https://www.embo.org/press-releases/twenty-eight-group-leaders-become-embo-young-investigators/",
+  },
+  {
+    date: "2025-06-06",
+    displayDate: "6 Jun 2025",
+    source: "The Young Academy of Denmark",
+    title: "Alexander Hauser elected to the Young Academy of Denmark",
+    href: "https://youngacademy.dk/da/velkommen-til-nye-medlemmer-af-dua-2/",
+  },
+  {
+    date: "2023",
+    displayDate: "2023",
+    source: "Independent Research Fund Denmark",
+    title: "Research leader interview with Alexander Sebastian Hauser",
+    href: "https://dff.dk/en/our-funded-projects/meet-the-researchers/research-leaders/eksterne-personer-en/research-leaders-2023/alexander-sebastian-hauser/",
+  },
+  {
+    date: "2023-09-27",
+    displayDate: "27 Sep 2023",
+    source: "Integrative Structural Biology at the University of Copenhagen",
+    title: "Introducing Alexander Hauser",
+    href: "https://isbuc.ku.dk/introducing-alexander-hauser/",
+  },
+];
+---
+
+<CategoryPage title="News" tone="y">
+  <ul class="paper-list" role="list">
+    {stories.map((story) => (
+      <li>
+        <a href={story.href}>
+          <time class="paper-year" datetime={story.date}>
+            {story.displayDate}
+          </time>
+          <span>
+            <small>{story.source}</small>
+            <strong>{story.title}</strong>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</CategoryPage>
+
+<style>
+  .paper-list a {
+    grid-template-columns: clamp(6ch, 11vw, 12ch) 1fr auto;
+  }
+</style>

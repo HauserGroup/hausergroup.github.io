@@ -1,0 +1,149 @@
+---
+import MemberPortrait from "../../components/MemberPortrait.astro";
+import Base from "../../layouts/Base.astro";
+import { recentPapersFor } from "../../data/memberPapers";
+import { profiles } from "../../data/profiles";
+
+export function getStaticPaths() {
+  return profiles.map((person) => ({
+    params: { slug: person.slug },
+    props: { person },
+  }));
+}
+const { person } = Astro.props;
+const papers = recentPapersFor(person.slug);
+---
+
+<Base title={`${person.name} · Hauser Group`}>
+  <article class:list={["wrap", "profile", person.color]}>
+    <a class="back" href={person.alumni ? "/alumni/" : "/people/"}>
+      {person.alumni ? "← Alumni" : "← All people"}
+    </a>
+    <div class="profile-grid">
+      <div class="portrait-frame">
+        <MemberPortrait
+          src={person.portrait}
+          initials={person.initials}
+          eager
+        />
+      </div>
+      <div class="details">
+        <p class="role">{person.title}</p>
+        <h1>{person.name}</h1>
+        <ul aria-label="Contact and research profiles">
+          {person.links.map((link) => (
+            <li>
+              <a href={link.href}>
+                {link.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    {papers.length > 0 && (
+      <section class="personal-papers" aria-labelledby="recent-papers">
+        <h2 id="recent-papers">Recent papers</h2>
+        <ol>
+          {papers.map((paper) => (
+            <li>
+              <a href={"https://doi.org/" + paper.doi}>
+                <span>
+                  <small>
+                    {paper.year} · {paper.journal}
+                  </small>
+                  <strong>{paper.title}</strong>
+                </span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </article>
+</Base>
+<style>
+  .personal-papers {
+    margin-top: clamp(45px, 7vw, 90px);
+  }
+  .personal-papers h2 {
+    font-size: clamp(1.9rem, 4vw, 3.5rem);
+  }
+  .personal-papers ol {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .personal-papers li a {
+    gap: 16px;
+  }
+  .personal-papers small {
+    display: block;
+    font: 500 0.78rem/1.5 var(--f-mono);
+    margin-bottom: 5px;
+  }
+  .personal-papers strong {
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+  }
+  .profile {
+    padding-block: clamp(36px, 6vw, 88px) clamp(72px, 11vw, 140px);
+  }
+  .back,
+  .role {
+    font: 500 0.85rem/1.5 var(--f-mono);
+  }
+  .back {
+    text-underline-offset: 4px;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.35fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 96px);
+    margin-top: 40px;
+  }
+  .portrait-frame {
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--c);
+    background: var(--t);
+  }
+  h1 {
+    font-size: clamp(2.75rem, 6.4vw, 6.5rem);
+    line-height: 0.98;
+    margin: 12px 0 32px;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+  li {
+    border-bottom: 1px solid var(--line);
+  }
+  li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 4px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  li a:hover,
+  li a:focus-visible {
+    background: var(--t);
+  }
+  @media (max-width: 680px) {
+    .profile-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 22px;
+    }
+    .portrait-frame {
+      width: min(100%, 270px);
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+const { standalone = false } = Astro.props;
+---
+
+<section class="wrap mission" id="mission">
+  {standalone ? (
+    <h1 class="about-title">Mission</h1>
+  ) : (
+    <p class="cap">Mission</p>
+  )}
+  <p class="say">
+    We integrate large biomedical data in genomics, structural biology,
+    pharmacology and health care with new computational methods,{" "}
+    <span>
+      to find novel drug targets and reveal the principles that run biological
+      systems.
+    </span>
+  </p>
+</section>

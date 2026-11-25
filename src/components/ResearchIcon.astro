@@ -1,0 +1,93 @@
+---
+interface Props {
+  kind: "variant" | "peptide" | "signalling";
+}
+const { kind } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 200 180"
+  class="research-icon"
+  aria-hidden="true"
+  fill="none"
+  stroke="var(--ink)"
+  stroke-width="4"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  {kind === "variant" && (
+    <g transform="rotate(28 100 90)">
+      <path
+        d="M67 21 C67 63 133 65 133 90 S67 121 67 158 M133 21 C133 63 67 65 67 90 S133 121 133 158"
+        stroke="var(--ink)"
+        stroke-width="12"
+      />
+      <path
+        d="M67 21 C67 63 133 65 133 90 S67 121 67 158"
+        stroke="var(--c)"
+        stroke-width="6"
+      />
+      <path
+        d="M73 31h54 M82 45h36 M87 73h26 M74 91h52 M87 107h26 M84 136h32 M73 149h54"
+        stroke-width="5"
+      />
+      <circle cx="115" cy="91" r="10" fill="white" />
+      <circle cx="115" cy="91" r="4" stroke="none" fill="var(--red)" />
+    </g>
+  )}
+  {kind === "peptide" && (
+    <g>
+      <path
+        d="M29 136 49 91Q58 74 69 85L86 105Q99 119 112 104L130 82Q141 70 151 89L171 136Q175 147 163 147H36Q24 147 29 136Z"
+        fill="var(--c)"
+      />
+      <path d="m63 42 19 10 16-13 18 11 18-15" stroke-width="6" />
+      {[
+        [63, 42],
+        [82, 52],
+        [98, 39],
+        [116, 50],
+        [134, 35],
+      ].map(([cx, cy], i) => (
+        <circle {cx} {cy} r="7" fill={i === 2 ? "var(--yellow)" : "white"} />
+      ))}
+      <path d="M99 60v26m-7-7 7 7 7-7" stroke-width="3" />
+    </g>
+  )}
+  {kind === "signalling" && (
+    <g>
+      <path d="M30 32v115h144" stroke-width="4" />
+      <path
+        d="M40 135c22 0 29-3 39-29 15-39 21-58 77-58"
+        stroke="var(--c)"
+        stroke-width="8"
+      />
+      <path
+        d="M40 136c36 0 43-1 59-17 17-17 26-29 58-29"
+        stroke-dasharray="6 7"
+      />
+      {[
+        [51, 134],
+        [78, 108],
+        [104, 59],
+        [144, 48],
+      ].map(([cx, cy]) => (
+        <circle {cx} {cy} r="6" fill="white" stroke-width="3" />
+      ))}
+      {[
+        [94, 122],
+        [119, 99],
+        [148, 90],
+      ].map(([x, y]) => (
+        <rect
+          x={x - 4}
+          y={y - 4}
+          width="8"
+          height="8"
+          fill="var(--ink)"
+          stroke="none"
+        />
+      ))}
+    </g>
+  )}
+</svg>
