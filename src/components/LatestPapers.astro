@@ -1,0 +1,146 @@
+---
+import { latestPapers } from "../data/publications";
+const dateLabel = (value: string) =>
+  new Date(value + "T12:00:00Z").toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<section class="wrap latest-papers g" aria-labelledby="latest-papers-title">
+  <div class="latest-heading">
+    <div>
+      <h2 id="latest-papers-title">Latest papers</h2>
+    </div>
+    <a class="text-link" href="/publications/">
+      All publications →
+    </a>
+  </div>
+  <ol class="latest-list">
+    {latestPapers.map((paper) => (
+      <li>
+        <a class="latest-paper" href={"https://doi.org/" + paper.doi}>
+          <span class="latest-meta">
+            <span>{paper.journal}</span>
+            {paper.publishedOn && (
+              <time datetime={paper.publishedOn}>
+                {dateLabel(paper.publishedOn)}
+              </time>
+            )}
+          </span>
+          <div class="latest-detail">
+            <h3>{paper.title}</h3>
+            <span class="latest-authors">{paper.authors}</span>
+          </div>
+          <span class="latest-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .latest-papers {
+    padding-top: 72px;
+    padding-bottom: 68px;
+  }
+  .latest-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 26px;
+  }
+  .eyebrow {
+    margin: 0 0 10px;
+    font: 500 11px/1.5 var(--f-mono);
+    letter-spacing: 0.06em;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+  }
+  .latest-heading > a {
+    flex-shrink: 0;
+  }
+  .latest-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .latest-paper {
+    display: grid;
+    grid-template-columns: minmax(135px, 21%) 1fr 24px;
+    gap: 24px;
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .latest-paper:hover,
+  .latest-paper:focus-visible {
+    background: var(--t);
+  }
+  .latest-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font: 500 11px/1.5 var(--f-mono);
+  }
+  .latest-meta time {
+    color: var(--ink-2);
+    font-weight: 400;
+  }
+  h3 {
+    font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+  .latest-authors {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .latest-authors {
+    color: var(--ink-2);
+  }
+  .latest-arrow {
+    font: 24px/1.2 var(--f-mono);
+  }
+  @media (max-width: 700px) {
+    .latest-papers {
+      padding-top: 48px;
+      padding-bottom: 46px;
+    }
+    .latest-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .latest-paper {
+      grid-template-columns: 1fr 22px;
+      gap: 10px 12px;
+      padding: 19px 0;
+    }
+    .latest-meta {
+      grid-column: 1;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+    }
+    .latest-detail {
+      grid-column: 1;
+    }
+    .latest-arrow {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
+  }
+</style>

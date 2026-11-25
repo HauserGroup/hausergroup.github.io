@@ -8,6 +8,22 @@ interface Props {
   description?: string;
 }
 
+const mainLinks = [
+  ["About", "/about/"],
+  ["Research", "/research/"],
+  ["Publications", "/publications/"],
+  ["Software", "/software/"],
+  ["People", "/people/"],
+  ["Join us", "/opportunities/"],
+  ["Contact", "/contact/"],
+];
+const moreLinks = [
+  ["News", "/news/"],
+  ["Alumni", "/alumni/"],
+  ["Services", "/services/"],
+];
+const active = (href: string) =>
+  Astro.url.pathname.startsWith(href) ? "page" : undefined;
 const {
   title = "Hauser Group · Pharmacoinformatics",
   description = "The Hauser Group studies how human genetic variation changes the way G protein-coupled receptors respond to drugs. Department of Drug Design and Pharmacology, University of Copenhagen.",
@@ -41,12 +57,25 @@ const {
         Hauser Group
       </a>
       <div class="top-right">
-        <nav aria-label="Main">
-          <a href="/#mission">Mission</a>
-          <a href="/#research">Research</a>
-          <a href="/#software">Software</a>
-          <a href="/#people">People</a>
+        <nav class="desktop-nav" aria-label="Main">
+          {mainLinks.map(([label, href]) => (
+            <a href={href} aria-current={active(href)}>
+              {label}
+            </a>
+          ))}
         </nav>
+        <details class="site-menu">
+          <summary>
+            More <span aria-hidden="true">⌄</span>
+          </summary>
+          <nav aria-label="More categories">
+            {moreLinks.map(([label, href]) => (
+              <a href={href} aria-current={active(href)}>
+                {label}
+              </a>
+            ))}
+          </nav>
+        </details>
         <a class="btn" href={GROUP_PAGE}>
           Group page at UCPH{" "}
           <span class="arr" aria-hidden="true">
@@ -61,6 +90,11 @@ const {
     </main>
 
     <footer class="wrap foot cap">
+      <nav aria-label="Additional categories">
+        {moreLinks.map(([label, href]) => (
+          <a href={href}>{label}</a>
+        ))}
+      </nav>
       <span>Hauser Group · Pharmacoinformatics</span>
       <span>
         Department of Drug Design and Pharmacology, University of Copenhagen

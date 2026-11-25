@@ -1,0 +1,77 @@
+---
+import { profiles } from "../data/profiles";
+import MemberPortrait from "./MemberPortrait.astro";
+interface Props {
+  alumni?: boolean;
+  standalone?: boolean;
+}
+const { standalone = false, alumni = false } = Astro.props;
+const Heading = standalone ? "h1" : "h2";
+---
+
+<section class="wrap people" id={alumni ? "alumni" : "people"}>
+  <div class="head">
+    <Heading>{alumni ? "Alumni" : "People"}</Heading>
+  </div>
+  <div class="crew">
+    {profiles
+      .filter((person) => Boolean(person.alumni) === alumni)
+      .map((person) => (
+        <a
+          class:list={["person", person.color]}
+          href={`/people/${person.slug}/`}
+        >
+          <div class="portrait">
+            <MemberPortrait
+              src={person.portrait}
+              initials={person.initials}
+              eager={standalone}
+            />
+            <span class="open-profile" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+          <div>
+            <p class="name">{person.name}</p>
+            <p class="cap">{person.title}</p>
+          </div>
+        </a>
+      ))}
+  </div>
+</section>
+
+<style>
+  .person {
+    text-decoration: none;
+  }
+  .portrait {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1.5px solid var(--ink);
+    background: var(--t);
+  }
+  .open-profile {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--ink);
+    background: var(--t);
+    color: var(--ink);
+    font: 20px/1 var(--f-mono);
+  }
+  .person:hover .name,
+  .person:focus-visible .name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .person:hover .open-profile,
+  .person:focus-visible .open-profile {
+    background: var(--ink);
+    color: white;
+  }
+</style>

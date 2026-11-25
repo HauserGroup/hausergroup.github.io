@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+import PeopleSection from "../components/PeopleSection.astro";
+import { emailLink } from "../data/contact";
+---
+
+<Base title="Alumni · Hauser Group">
+  <PeopleSection standalone alumni />
+  <div class="wrap alumni-contact">
+    <a class="text-link" href={emailLink("Hauser Group alumni")}>
+      Contact the group →
+    </a>
+  </div>
+</Base>
+<style>
+  .alumni-contact {
+    padding-bottom: 64px;
+  }
+</style>

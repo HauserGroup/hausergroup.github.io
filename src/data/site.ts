@@ -7,47 +7,6 @@ export type Primary = "b" | "r" | "y" | "g";
 export const GROUP_PAGE =
   "https://drug.ku.dk/research-sections/pharmaceutical-informatics/pharmacoinformatics/";
 
-export interface Person {
-  name: string;
-  title: string;
-  initials: string;
-  color: Primary;
-}
-
-// Names and titles only. No phone numbers or email addresses on this site.
-export const people: Person[] = [
-  {
-    name: "Alexander Sebastian Hauser",
-    title: "Associate Professor, group leader",
-    initials: "AH",
-    color: "b",
-  },
-  {
-    name: "Luuk Robin Hoegen Dijkhof",
-    title: "PhD Fellow",
-    initials: "LH",
-    color: "r",
-  },
-  {
-    name: "Jakob Sture Madsen",
-    title: "PhD Fellow",
-    initials: "JM",
-    color: "y",
-  },
-  {
-    name: "David Reiner-Link",
-    title: "International Researcher",
-    initials: "DR",
-    color: "g",
-  },
-  {
-    name: "Teemu Kalle Eemeli Rönkkö",
-    title: "PhD Fellow",
-    initials: "TR",
-    color: "b",
-  },
-];
-
 export const scales = [
   {
     id: "01 in_silico",
@@ -82,27 +41,34 @@ export const research = [
     title: "Pharmacogenomics And Personalised Medicine",
     text: "Linking missense variants in GPCRs to drug response and to patient cohorts, so a prescription can follow a genotype.",
     color: "y",
-    shape: "border-radius: 999px 999px 0 0; aspect-ratio: 2/1",
+    icon: "variant",
+    modelQuestion:
+      "Which receptor variants change a drug response enough to investigate in cells or in patient data?",
     reach: ["in silico", "in vitro", "in human", "in field"],
   },
   {
     title: "Peptide–Receptor Pairs Across The Domains Of Life",
     text: "Venom, plant and microbial peptides act on receptors in other species. We use co-evolution and structure prediction to find them on purpose.",
     color: "g",
-    shape: "border-radius: 0 100% 0 100%; transform: rotate(-10deg)",
+    icon: "peptide",
+    modelQuestion:
+      "Which peptide and receptor pairs are likely to bind, and which predictions should we test first?",
     reach: ["in silico", "in vitro"],
   },
   {
     title: "Molecular Pharmacology Of GPCRs",
     text: "Assays for binding, selectivity and signalling that show how human variants change the action of approved drugs.",
     color: "r",
-    shape: "border-radius: 50%",
+    icon: "signalling",
+    modelQuestion:
+      "Can a binding or signalling measurement help predict which pathway a ligand activates?",
     reach: ["in vitro"],
   },
 ] satisfies {
   title: string;
   text: string;
   color: Primary;
-  shape: string;
+  icon: "variant" | "peptide" | "signalling";
+  modelQuestion: string;
   reach: string[];
 }[];

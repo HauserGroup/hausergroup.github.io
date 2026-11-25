@@ -1,0 +1,162 @@
+---
+import Receptor from "./Receptor.astro";
+
+const scenes = ["Genomics", "Structure", "Pharmacology", "Health care"];
+---
+
+<div class="particle-hero" data-particle-hero>
+  <div class="particle-stage">
+    <div class="receptor-poster">
+      <Receptor />
+    </div>
+    <canvas
+      data-particle-canvas
+      role="img"
+      aria-label="Animated GPCR research illustration"
+    ></canvas>
+  </div>
+  <div class="particle-controls" role="group" aria-label="Animation controls">
+    <div class="scene-switch" role="group" aria-label="Choose a scene">
+      {scenes.map((scene, i) => (
+        <button type="button" data-particle-mode={i} aria-pressed={i === 1}>
+          {scene}
+        </button>
+      ))}
+    </div>
+    <button
+      type="button"
+      data-particle-pause
+      aria-label="Pause animation"
+      aria-pressed="false"
+    >
+      <span aria-hidden="true" class="pause-symbol"></span>
+    </button>
+  </div>
+</div>
+
+<script is:inline type="module" src="/gpcr-particles.js"></script>
+
+<style>
+  .particle-hero {
+    width: min(650px, 100%);
+  }
+  .particle-stage {
+    position: relative;
+    aspect-ratio: 1.15;
+    background: radial-gradient(
+      ellipse at center,
+      var(--bg) 48%,
+      var(--blue-t) 72%,
+      transparent 96%
+    );
+    isolation: isolate;
+  }
+  canvas,
+  .receptor-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .receptor-poster {
+    display: grid;
+    place-items: center;
+  }
+  .receptor-poster :global(svg) {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+  }
+  canvas {
+    display: block;
+    visibility: hidden;
+    touch-action: pan-y;
+    cursor: crosshair;
+  }
+  .particle-controls {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin: 4px auto 0;
+  }
+  [data-ready="true"] canvas {
+    visibility: visible;
+  }
+  [data-ready="true"] .receptor-poster {
+    display: none;
+  }
+  [data-ready="true"] .particle-controls {
+    display: flex;
+  }
+  .scene-switch {
+    display: flex;
+    align-items: stretch;
+    border: 1.5px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    background: var(--white);
+  }
+  .particle-controls button {
+    padding: 9px 10px;
+    border: 0;
+    color: var(--ink);
+    background: var(--white);
+    font: 500 11px/1.15 var(--f-mono);
+    cursor: pointer;
+  }
+  .scene-switch button + button {
+    border-left: 1px solid var(--ink);
+  }
+  .scene-switch button[aria-pressed="true"] {
+    color: var(--white);
+    background: var(--blue);
+  }
+  .particle-controls button:hover:not([aria-pressed="true"]) {
+    background: var(--blue-t);
+  }
+  .particle-controls button:focus-visible {
+    position: relative;
+    z-index: 1;
+  }
+  .particle-controls [data-particle-pause] {
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+    min-width: 31px;
+    border: 1.5px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .pause-symbol {
+    width: 8px;
+    height: 10px;
+    border-inline: 3px solid currentColor;
+  }
+  [data-particle-pause][aria-pressed="true"] .pause-symbol {
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: 5px 0 5px 8px;
+    border-left-color: currentColor;
+  }
+  @media (min-width: 1201px) {
+    .particle-hero {
+      width: min(650px, 55%);
+    }
+  }
+  @media (max-width: 520px) {
+    .particle-stage {
+      aspect-ratio: 1.05;
+    }
+    .particle-controls {
+      gap: 5px;
+    }
+    .particle-controls button {
+      padding: 9px 5px;
+      font-size: 10px;
+    }
+    .scene-switch {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

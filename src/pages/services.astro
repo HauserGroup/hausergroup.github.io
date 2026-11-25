@@ -1,0 +1,29 @@
+---
+import CategoryPage from "../components/CategoryPage.astro";
+import { emailLink } from "../data/contact";
+---
+
+<CategoryPage title="Services" tone="b">
+  <div class="option-grid">
+    <article class="option b">
+      <h2>Analysis software</h2>
+      <p>
+        Use CurveBook for dose–response curves and scientific graphs, or
+        scikit-opls for multivariate modelling in Python.
+      </p>
+      <a class="text-link" href="/software/">
+        Explore the tools →
+      </a>
+    </article>
+    <article class="option g">
+      <h2>Research enquiries</h2>
+      <p>
+        Contact us about a receptor modelling, pharmacology or data analysis
+        collaboration.
+      </p>
+      <a class="text-link" href={emailLink("Research methods enquiry")}>
+        Discuss a project →
+      </a>
+    </article>
+  </div>
+</CategoryPage>

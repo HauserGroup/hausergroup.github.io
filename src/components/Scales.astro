@@ -1,0 +1,44 @@
+---
+import { scales } from "../data/site";
+const sequence = [
+  { aa: "I", pos: "3.46" },
+  { aa: "A", pos: "3.47" },
+  { aa: "V", pos: "3.48" },
+  { aa: "D", pos: "3.49" },
+  { aa: "C", pos: "R3.50C", swap: true },
+  { aa: "Y", pos: "3.51" },
+  { aa: "L", pos: "3.52" },
+  { aa: "A", pos: "3.53" },
+];
+---
+
+<section class="wrap scales">
+  <div class="head">
+    <h2>From One Residue To One Patient</h2>
+  </div>
+  <div
+    class="seq"
+    aria-label="Illustrative stretch of helix 3 with one residue replaced by a variant"
+  >
+    {sequence.map((r) => (
+      <div class:list={["res", { swap: r.swap }]}>
+        <b>{r.aa}</b>
+        <small>{r.pos}</small>
+      </div>
+    ))}
+  </div>
+  <p class="cap seq-cap">
+    Helix 3 around the DRY motif. Illustrative sequence.
+  </p>
+  <div class="wins">
+    {scales.map((s) => (
+      <div class:list={["win", s.color]}>
+        <div class="win-bar">
+          {s.id}
+          <i />
+        </div>
+        <div class="win-body">{s.text}</div>
+      </div>
+    ))}
+  </div>
+</section>
