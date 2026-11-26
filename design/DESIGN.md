@@ -129,7 +129,8 @@ and must be Alex's own words. While it is empty, a marked draft shows in
 the published site.
 
 **From One Residue To One Patient** (`src/components/Scales.astro`): the
-research section, on the homepage and on /research. The residue bricks show a
+research section, on the homepage (`/#research`) and on /about. The residue
+bricks show a
 variant; below them, the four scales in four columns under a 2 px ink rule.
 Each column is the scale's shape in full color, its name, what we do at that
 scale, and one concrete example in grey. The examples carry what used to be
