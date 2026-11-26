@@ -1,7 +1,7 @@
 # hausergroup.github.io
 
 The Hauser Group website, built with [Astro](https://astro.build) and published at
-<https://hausergroup.github.io>.
+<https://hausergroup.org>.
 
 ## Run it locally
 
