@@ -3,6 +3,7 @@ import MemberPortrait from "../../components/MemberPortrait.astro";
 import Base from "../../layouts/Base.astro";
 import { recentPapersFor } from "../../data/memberPapers";
 import { profiles } from "../../data/profiles";
+import { breadcrumbJsonLd, personJsonLd } from "../../data/structuredData";
 
 export function getStaticPaths() {
   return profiles.map((person) => ({
@@ -12,9 +13,29 @@ export function getStaticPaths() {
 }
 const { person } = Astro.props;
 const papers = recentPapersFor(person.slug);
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
+const personDescription = person.alumni
+  ? `${person.name}, ${person.title} of the Hauser Group (Pharmacoinformatics) at the University of Copenhagen.`
+  : `${person.name}, ${person.title} in the Hauser Group (Pharmacoinformatics), Department of Drug Design and Pharmacology, University of Copenhagen.`;
+const breadcrumbs = breadcrumbJsonLd(
+  [
+    person.alumni
+      ? { name: "Alumni", path: "/alumni/" }
+      : { name: "People", path: "/people/" },
+    { name: person.name, path: `/people/${person.slug}/` },
+  ],
+  siteOrigin,
+);
 ---
 
-<Base title={`${person.name} · Hauser Group`}>
+<Base
+  title={`${person.name} · Hauser Group`}
+  description={personDescription}
+  ogType="profile"
+  ogImage={person.portrait}
+  ogImageAlt={person.portrait ? `${person.name} — Hauser Group` : undefined}
+  jsonLd={[breadcrumbs, personJsonLd(person, siteOrigin)]}
+>
   <article class:list={["wrap", "profile", person.color]}>
     <a class="back" href={person.alumni ? "/alumni/" : "/people/"}>
       {person.alumni ? "← Alumni" : "← All people"}
@@ -24,6 +45,7 @@ const papers = recentPapersFor(person.slug);
         <MemberPortrait
           src={person.portrait}
           initials={person.initials}
+          alt={person.name}
           eager
         />
       </div>

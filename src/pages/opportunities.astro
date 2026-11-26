@@ -3,7 +3,11 @@ import CategoryPage from "../components/CategoryPage.astro";
 import { joinOptions } from "../data/site";
 ---
 
-<CategoryPage title="Work With Us" tone="y">
+<CategoryPage
+  title="Work With Us"
+  description="Join the Hauser Group in Copenhagen: PhD fellowships, postdoctoral positions, MSc and exchange thesis projects, visiting researchers and collaborations in GPCR pharmacoinformatics."
+  tone="y"
+>
   <div class="option-grid">
     {joinOptions.map(({ title, body, label, href, color }) => (
       <article class:list={["option", color]}>

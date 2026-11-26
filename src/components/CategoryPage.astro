@@ -1,13 +1,27 @@
 ---
 import Base from "../layouts/Base.astro";
+import { breadcrumbJsonLd, type JsonLd } from "../data/structuredData";
+
 interface Props {
   title: string;
+  description: string;
   tone?: string;
+  jsonLd?: JsonLd | JsonLd[];
 }
-const { title, tone = "b" } = Astro.props;
+const { title, description, tone = "b", jsonLd } = Astro.props;
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
+const breadcrumb = breadcrumbJsonLd(
+  [{ name: title, path: Astro.url.pathname }],
+  siteOrigin,
+);
+const extraJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
-<Base title={title + " · Hauser Group"}>
+<Base
+  title={title + " · Hauser Group"}
+  description={description}
+  jsonLd={[breadcrumb, ...extraJsonLd]}
+>
   <div class:list={["wrap", "directory-page", tone]}>
     <header class="directory-heading">
       <h1>{title}</h1>

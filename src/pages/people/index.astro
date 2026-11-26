@@ -1,8 +1,15 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PeopleSection from "../../components/PeopleSection.astro";
+import { breadcrumbJsonLd } from "../../data/structuredData";
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
 ---
 
-<Base title="People · Hauser Group">
+<Base
+  title="People · Hauser Group"
+  description="Meet the group leader, postdocs, PhD fellows and students of the Hauser Group in Pharmacoinformatics at the University of Copenhagen."
+  jsonLd={breadcrumbJsonLd([{ name: "People", path: "/people/" }], siteOrigin)}
+>
   <PeopleSection standalone />
 </Base>

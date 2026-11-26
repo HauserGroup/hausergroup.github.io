@@ -2,10 +2,22 @@
 import "../styles/site.css";
 import Logo from "../components/Logo.astro";
 import { GROUP_PAGE } from "../data/site";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_ALT,
+  SITE_NAME,
+  type JsonLd,
+} from "../data/structuredData";
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  ogType?: "website" | "profile";
+  ogImage?: string;
+  ogImageAlt?: string;
+  jsonLd?: JsonLd | JsonLd[];
 }
 
 // Keep the header short: the homepage tells the story, the rest is in the footer.
@@ -27,8 +39,21 @@ const active = (href: string) =>
   Astro.url.pathname.startsWith(href) ? "page" : undefined;
 const {
   title = "Hauser Group · Pharmacoinformatics",
-  description = "The Hauser Group studies how human genetic variation changes the way G protein-coupled receptors respond to drugs. Department of Drug Design and Pharmacology, University of Copenhagen.",
+  description = DEFAULT_DESCRIPTION,
+  noindex = false,
+  ogType = "website",
+  ogImage,
+  ogImageAlt = DEFAULT_OG_IMAGE_ALT,
+  jsonLd,
 } = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
+const canonicalUrl = noindex
+  ? undefined
+  : new URL(Astro.url.pathname, siteOrigin).href;
+const resolvedOgImage = new URL(ogImage ?? DEFAULT_OG_IMAGE, siteOrigin).href;
+const twitterCard = ogImage ? "summary" : "summary_large_image";
+const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -41,6 +66,19 @@ const {
     />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,6 +86,13 @@ const {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     />
+    {jsonLdBlocks.map((block) => (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(block).replaceAll("<", "\\u003c")}
+      />
+    ))}
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
