@@ -7,9 +7,12 @@ import Software from "../components/Software.astro";
 import LatestPapers from "../components/LatestPapers.astro";
 import PeopleSection from "../components/PeopleSection.astro";
 import { joinOptions } from "../data/site";
+import { organizationJsonLd, websiteJsonLd } from "../data/structuredData";
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
 ---
 
-<Base>
+<Base jsonLd={[organizationJsonLd(siteOrigin), websiteJsonLd(siteOrigin)]}>
   <section class="wrap hero">
     <div class="sky dots b cut-bottom">
       <div class="sim">

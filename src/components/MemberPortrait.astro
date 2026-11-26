@@ -2,15 +2,16 @@
 interface Props {
   src?: string;
   initials: string;
+  alt?: string;
   eager?: boolean;
 }
-const { src, initials, eager = false } = Astro.props;
+const { src, initials, alt = "", eager = false } = Astro.props;
 ---
 
 {src ? (
   <img
     src={src}
-    alt=""
+    alt={alt}
     width="640"
     height="640"
     loading={eager ? "eager" : "lazy"}

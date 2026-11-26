@@ -1,9 +1,19 @@
 ---
 import Base from "../layouts/Base.astro";
 import Software from "../components/Software.astro";
+import { breadcrumbJsonLd, softwareJsonLd } from "../data/structuredData";
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
 ---
 
-<Base title="Software · Hauser Group">
+<Base
+  title="Software · Hauser Group"
+  description="Open-source scientific software from the Hauser Group: CurveBook for biostatistics and curve fitting in Rust, and scikit-opls for OPLS and OPLS-DA in Python."
+  jsonLd={[
+    breadcrumbJsonLd([{ name: "Software", path: "/software/" }], siteOrigin),
+    softwareJsonLd(siteOrigin),
+  ]}
+>
   <div class="category-content">
     <Software standalone />
   </div>

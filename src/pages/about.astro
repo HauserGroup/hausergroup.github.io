@@ -2,9 +2,19 @@
 import Base from "../layouts/Base.astro";
 import Mission from "../components/Mission.astro";
 import Scales from "../components/Scales.astro";
+import { breadcrumbJsonLd, organizationJsonLd } from "../data/structuredData";
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
 ---
 
-<Base title="About · Hauser Group">
+<Base
+  title="About · Hauser Group"
+  description="Mission and four-scale pharmacoinformatics approach of the Hauser Group at the Department of Drug Design and Pharmacology, University of Copenhagen."
+  jsonLd={[
+    breadcrumbJsonLd([{ name: "About", path: "/about/" }], siteOrigin),
+    organizationJsonLd(siteOrigin),
+  ]}
+>
   <div class="category-content">
     <Mission standalone />
     <Scales />

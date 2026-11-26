@@ -56,7 +56,11 @@ const stories = [
 ];
 ---
 
-<CategoryPage title="News" tone="y">
+<CategoryPage
+  title="News"
+  description="News, grants, fellowships and highlights from the Hauser Group at the University of Copenhagen, including ERC, Lundbeck Foundation and EMBO awards."
+  tone="y"
+>
   <ul class="paper-list" role="list">
     {stories.map((story) => (
       <li>

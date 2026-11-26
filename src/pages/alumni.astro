@@ -2,9 +2,16 @@
 import Base from "../layouts/Base.astro";
 import PeopleSection from "../components/PeopleSection.astro";
 import { emailLink } from "../data/contact";
+import { breadcrumbJsonLd } from "../data/structuredData";
+
+const siteOrigin = Astro.site ?? new URL("https://hausergroup.org");
 ---
 
-<Base title="Alumni · Hauser Group">
+<Base
+  title="Alumni · Hauser Group"
+  description="Former group members and alumni of the Hauser Group in Pharmacoinformatics at the University of Copenhagen."
+  jsonLd={breadcrumbJsonLd([{ name: "Alumni", path: "/alumni/" }], siteOrigin)}
+>
   <PeopleSection standalone alumni />
   <div class="wrap alumni-contact">
     <a class="text-link" href={emailLink("Hauser Group alumni")}>
