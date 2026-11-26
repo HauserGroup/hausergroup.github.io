@@ -42,7 +42,7 @@ import { joinOptions } from "../data/site";
 
   <PeopleSection />
 
-  <section class="join-sheet" id="join">
+  <section class="join-sheet dots y" id="join">
     <div class="wrap join-inner">
       <h2>Work With Us</h2>
       <ul class="join-list">
@@ -61,10 +61,12 @@ import { joinOptions } from "../data/site";
 </Base>
 
 <style>
-  /* Closing sheet: full-strength yellow paper with a scissor-cut top edge. */
+  /* Closing sheet with a scissor-cut top edge, in the hero's halftone
+     texture but yellow. The dots are densest at the bottom, mirroring the
+     hero. */
   .join-sheet {
     margin-top: 96px;
-    background: var(--yellow);
+    background: var(--t);
     color: var(--ink);
     clip-path: polygon(
       0 18px,
