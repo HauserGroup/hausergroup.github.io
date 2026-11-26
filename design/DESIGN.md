@@ -101,7 +101,8 @@ Rules:
 
 | Role         | Face          | Weight  | Notes                                            |
 | ------------ | ------------- | ------- | ------------------------------------------------ |
-| Headings     | Inter Tight   | 500     | Title Case, tracking −0.045em, line height ≈ 0.9 |
+| Headings     | Geologica     | 450     | Title Case, tracking −0.045em, line height ≈ 0.9 |
+| Wordmark     | Geologica     | 500–600 | Header logo text and the `34%` sticker           |
 | Body         | Inter Tight   | 400     | 17 px, line height 1.55                          |
 | Data, chrome | IBM Plex Mono | 400–600 | Windows, residue labels, facts, axis labels      |
 
@@ -109,6 +110,10 @@ Rules:
   they scale with the viewport.
 - Section headings use Title Case. Body text and captions use sentence case.
 - Captions are 13 px in `--ink-2`, and rare (see "Few captions").
+- Geologica runs at Sharpness 100, which turns curve joins into hard corners to
+  echo the cut paper. It also sets paper titles on `/publications/`. It covers
+  Greek, so titles with `β`, `µ` or `κ` stay in one face; check Greek coverage
+  before swapping in any other heading font.
 
 ## Components
 
