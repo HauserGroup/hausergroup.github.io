@@ -21,15 +21,18 @@ const Heading = standalone ? "h1" : "h2";
           class:list={["person", person.color]}
           href={`/people/${person.slug}/`}
         >
-          <div class="portrait">
-            <MemberPortrait
-              src={person.portrait}
-              initials={person.initials}
-              eager={standalone}
-            />
-            <span class="open-profile" aria-hidden="true">
-              ↗
-            </span>
+          <div class="frame">
+            <i class="paper" aria-hidden="true"></i>
+            <div class="portrait">
+              <MemberPortrait
+                src={person.portrait}
+                initials={person.initials}
+                eager={standalone}
+              />
+              <span class="open-profile" aria-hidden="true">
+                ↗
+              </span>
+            </div>
           </div>
           <div>
             <p class="name">{person.name}</p>
@@ -42,7 +45,33 @@ const Heading = standalone ? "h1" : "h2";
 
 <style>
   .person {
+    --tilt: -2deg;
     text-decoration: none;
+  }
+  .person:nth-child(4n + 2) {
+    --tilt: 1.6deg;
+  }
+  .person:nth-child(4n + 3) {
+    --tilt: -1deg;
+  }
+  .person:nth-child(4n) {
+    --tilt: 2.2deg;
+  }
+  /* Each portrait is pasted on a sheet of its person's color, slightly askew. */
+  .frame {
+    position: relative;
+    margin: 0 8px 8px 0;
+  }
+  .paper {
+    position: absolute;
+    inset: 0;
+    background: var(--c);
+    transform: translate(8px, 8px) rotate(var(--tilt));
+    transition: transform 160ms ease-out;
+  }
+  .person:hover .paper,
+  .person:focus-visible .paper {
+    transform: translate(5px, 5px) rotate(0deg);
   }
   .portrait {
     position: relative;

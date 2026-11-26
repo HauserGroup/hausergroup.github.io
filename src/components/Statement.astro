@@ -1,0 +1,94 @@
+---
+// The group leader's statement: a flat sheet of cut paper laid across the
+// bottom edge of the hero. Until `statement.text` is filled in, a marked draft
+// shows in `npm run dev` (or a build run with PUBLIC_SHOW_DRAFTS=1) and nothing
+// is rendered on the published site.
+import { statement } from "../data/site";
+
+const draft = !statement.text.trim();
+const show =
+  !draft || import.meta.env.DEV || import.meta.env.PUBLIC_SHOW_DRAFTS === "1";
+const text = draft
+  ? "Alex's statement goes here: two or three sentences, in his own words, on why the group does this work and what drives it."
+  : statement.text;
+---
+
+{show && (
+  <section class="wrap note-wrap" aria-label="Statement from the group leader">
+    <figure class:list={["note", { draft }]}>
+      {draft && <span class="draft-tag">draft</span>}
+      <blockquote>
+        <p>{text}</p>
+      </blockquote>
+      <figcaption>
+        <span class="who">{statement.author}</span>
+        <span class="role">{statement.role}</span>
+      </figcaption>
+    </figure>
+  </section>
+)}
+
+<style>
+  .note-wrap {
+    position: relative;
+    z-index: 3;
+    margin-top: -48px;
+    display: flex;
+    justify-content: center;
+  }
+  /* Same material as every other cut-paper object: flat, square, with a
+     short hard shadow and a slight tilt. */
+  .note {
+    position: relative;
+    margin: 0;
+    width: min(720px, 100%);
+    padding: 40px 44px 36px;
+    background: var(--white);
+    transform: rotate(-1deg);
+    box-shadow: 4px 6px 0 rgb(0 0 0 / 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  blockquote {
+    margin: 0;
+  }
+  blockquote p {
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    align-items: baseline;
+  }
+  .who {
+    font-weight: 600;
+  }
+  .role {
+    color: var(--ink-2);
+  }
+  .draft blockquote p {
+    color: var(--ink-2);
+  }
+  .draft-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 5px 8px;
+    border: 1.5px solid var(--red);
+    color: var(--red);
+    font: 500 12px/1 var(--f-mono);
+  }
+  @media (max-width: 640px) {
+    .note-wrap {
+      margin-top: -56px;
+    }
+    .note {
+      padding: 32px 22px 26px;
+    }
+  }
+</style>

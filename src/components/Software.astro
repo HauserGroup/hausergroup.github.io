@@ -6,7 +6,7 @@ const { standalone = false } = Astro.props;
   <div class="head">{standalone ? <h1>Software</h1> : <h2>Software</h2>}</div>
   <div class="tools">
     <article class="tool">
-      <div class="tile dots b">
+      <div class="tool-icon dots b">
         <svg
           viewBox="0 0 320 240"
           role="img"
@@ -16,55 +16,36 @@ const { standalone = false } = Astro.props;
             d="M30 20 V210 H305"
             fill="none"
             stroke="#17171A"
-            stroke-width="1.5"
+            stroke-width="3"
           ></path>
           <path
             d="M30 196 C100 196 140 180 165 120 S230 44 300 44"
             fill="none"
             stroke="#17171A"
-            stroke-width="3"
+            stroke-width="6"
           ></path>
-          <g fill="#1E4FC2" stroke="#17171A" stroke-width="1.5">
-            <circle cx="45" cy="192" r="6"></circle>
-            <circle cx="75" cy="188" r="6"></circle>
-            <circle cx="105" cy="183" r="6"></circle>
-            <circle cx="135" cy="162" r="6"></circle>
-            <circle cx="165" cy="118" r="6"></circle>
-            <circle cx="195" cy="78" r="6"></circle>
-            <circle cx="225" cy="58" r="6"></circle>
-            <circle cx="255" cy="49" r="6"></circle>
-            <circle cx="285" cy="46" r="6"></circle>
-          </g>
-          <g
-            font-family="IBM Plex Mono, monospace"
-            font-size="11"
-            fill="#6A6A70"
-          >
-            <text x="305" y="230" text-anchor="end">
-              log [drug]
-            </text>
-            <text x="36" y="16">
-              response
-            </text>
+          <g fill="#1E4FC2" stroke="#17171A" stroke-width="3">
+            <circle cx="60" cy="191" r="13"></circle>
+            <circle cx="120" cy="180" r="13"></circle>
+            <circle cx="165" cy="118" r="13"></circle>
+            <circle cx="210" cy="66" r="13"></circle>
+            <circle cx="270" cy="46" r="13"></circle>
           </g>
         </svg>
       </div>
       <div class="tool-text">
-        <p class="cap">Open source · Rust</p>
         <h3>CurveBook</h3>
         <p>
-          Biostatistics, nonlinear curve fitting and scientific graphs, written
-          from scratch in Rust. Data, analyses, graphs, layouts and notes stay
-          together in one <code>.curvebook</code> file you can send to a
+          Curve fitting, biostatistics and scientific graphs, with data,
+          analyses and notes kept together in one file you can send to a
           collaborator.
         </p>
         <div class="facts">
+          <span>Rust</span>
           <span>alpha</span>
-          <span>MCP + command line</span>
-          <span>GUI in development</span>
         </div>
-        <a class="btn lg" href="https://hausergroup.github.io/curvebook/">
-          Visit CurveBook{" "}
+        <a class="btn" href="https://hausergroup.github.io/curvebook/">
+          CurveBook{" "}
           <span class="arr" aria-hidden="true">
             ↗
           </span>
@@ -73,70 +54,43 @@ const { standalone = false } = Astro.props;
     </article>
 
     <article class="tool">
-      <div class="tile dots y">
+      <div class="tool-icon dots y">
         <svg
           viewBox="0 0 320 240"
           role="img"
-          aria-label="OPLS-DA score plot with two groups separated along the predictive component"
+          aria-label="Score plot with two groups separated along the predictive component"
         >
           <path
             d="M160 20 V220 M20 120 H300"
             fill="none"
             stroke="#17171A"
-            stroke-width="1.5"
-            stroke-dasharray="4 5"
+            stroke-width="3"
+            stroke-dasharray="8 9"
           ></path>
-          <g fill="#fff" stroke="#17171A" stroke-width="2">
-            <circle cx="80" cy="90" r="7"></circle>
-            <circle cx="98" cy="140" r="7"></circle>
-            <circle cx="70" cy="125" r="7"></circle>
-            <circle cx="110" cy="105" r="7"></circle>
-            <circle cx="92" cy="170" r="7"></circle>
-            <circle cx="65" cy="75" r="7"></circle>
-            <circle cx="118" cy="152" r="7"></circle>
-            <circle cx="86" cy="112" r="7"></circle>
+          <g fill="#fff" stroke="#17171A" stroke-width="3.5">
+            <circle cx="78" cy="88" r="15"></circle>
+            <circle cx="106" cy="140" r="15"></circle>
+            <circle cx="66" cy="150" r="15"></circle>
           </g>
-          <g fill="#F6C51B" stroke="#17171A" stroke-width="2">
-            <rect x="203" y="73" width="14" height="14"></rect>
-            <rect x="225" y="128" width="14" height="14"></rect>
-            <rect x="238" y="93" width="14" height="14"></rect>
-            <rect x="213" y="153" width="14" height="14"></rect>
-            <rect x="191" y="111" width="14" height="14"></rect>
-            <rect x="248" y="138" width="14" height="14"></rect>
-            <rect x="231" y="63" width="14" height="14"></rect>
-            <rect x="208" y="98" width="14" height="14"></rect>
-          </g>
-          <g
-            font-family="IBM Plex Mono, monospace"
-            font-size="11"
-            fill="#6A6A70"
-          >
-            <text x="305" y="236" text-anchor="end">
-              t[1] predictive
-            </text>
-            <text x="166" y="16">
-              to[1] orthogonal
-            </text>
+          <g fill="#F6C51B" stroke="#17171A" stroke-width="3.5">
+            <rect x="200" y="70" width="28" height="28"></rect>
+            <rect x="236" y="120" width="28" height="28"></rect>
+            <rect x="196" y="140" width="28" height="28"></rect>
           </g>
         </svg>
       </div>
       <div class="tool-text">
-        <p class="cap">Open source · Python</p>
         <h3>scikit-opls</h3>
         <p>
-          OPLS and OPLS-DA with a scikit-learn interface. It splits the
-          variation in X into a part that predicts y and an orthogonal part that
-          doesn't, then fits PLS on the cleaned data. Includes O2PLS, VIP
-          scores, S-plots and permutation tests, and works inside{" "}
-          <code>Pipeline</code> and <code>GridSearchCV</code>.
+          OPLS, OPLS-DA and O2PLS with a scikit-learn interface, plus VIP
+          scores, S-plots and permutation tests.
         </p>
         <div class="facts">
+          <span>Python</span>
           <span>v0.2.0</span>
-          <span>OPLS · OPLS-DA · O2PLS</span>
-          <span>scikit-learn compatible</span>
         </div>
-        <a class="btn lg y" href="https://hausergroup.github.io/scikit-opls/">
-          Visit scikit-opls{" "}
+        <a class="btn y" href="https://hausergroup.github.io/scikit-opls/">
+          scikit-opls{" "}
           <span class="arr" aria-hidden="true">
             ↗
           </span>

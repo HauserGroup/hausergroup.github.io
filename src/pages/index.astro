@@ -1,81 +1,139 @@
 ---
 import Base from "../layouts/Base.astro";
 import ParticleReceptor from "../components/ParticleReceptor.astro";
-import Mission from "../components/Mission.astro";
+import Statement from "../components/Statement.astro";
 import Scales from "../components/Scales.astro";
-import ResearchLines from "../components/ResearchLines.astro";
 import Software from "../components/Software.astro";
 import LatestPapers from "../components/LatestPapers.astro";
 import PeopleSection from "../components/PeopleSection.astro";
-import { GROUP_PAGE } from "../data/site";
+import { joinOptions } from "../data/site";
 ---
 
 <Base>
   <section class="wrap hero">
     <div class="sky dots b">
-      <div class="win w1">
-        <div class="win-bar">
-          mission.txt<span class="stripes"></span>
-        </div>
-        <div class="win-body">
-          We integrate genomics, structural biology, pharmacology and
-          health-care data to find new drug targets.
-        </div>
+      <div class="sim">
+        <ParticleReceptor />
+        <p class="sticker">
+          <i class="tape" aria-hidden="true"></i>
+          <b>34%</b>
+          of approved drugs act on a G protein-coupled receptor.
+        </p>
       </div>
-      <div class="win w2">
-        <div class="win-bar">
-          fact<span class="stripes"></span>
-        </div>
-        <div class="win-body">
-          <b>34%</b>of approved drugs act on a G protein-coupled receptor.
-        </div>
-      </div>
-      <ParticleReceptor />
-      <h1>Every Genome Reads The Same Drug Differently</h1>
+      <h1>
+        Every Genome Reads The Same Drug{" "}
+        <mark class="paper r">Differently</mark>
+      </h1>
+      <p class="hero-lead">
+        At the University of Copenhagen we combine genomics, structural biology,
+        pharmacology and health-care data to learn how human genetic variation
+        changes the way receptors respond to drugs.
+      </p>
     </div>
-    <p class="cap accent">
-      Pharmacoinformatics, Department of Drug Design and Pharmacology,
-      University of Copenhagen
-    </p>
   </section>
 
-  <Mission />
-
-  <LatestPapers />
+  <Statement />
 
   <Scales />
 
-  <ResearchLines />
+  <LatestPapers />
 
   <Software />
 
   <PeopleSection />
 
-  <section class="wrap" id="join">
-    <div class="panel dots y">
-      <div class="join-heading">
-        <h2>Work With Us</h2>
-        <a class="text-link" href="/opportunities/">
-          Positions and research visits <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <div class="win">
-        <div class="win-bar">
-          join.txt<span class="stripes"></span>
-        </div>
-        <div class="win-body">
-          Thesis, PhD or postdoc between computation and the lab? Find the group
-          on the department's website.
-          <br />
-          <br />
-          <a class="btn" href={GROUP_PAGE}>
-            Group page at UCPH{" "}
-            <span class="arr" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        </div>
-      </div>
+  <section class="join-sheet" id="join">
+    <div class="wrap join-inner">
+      <h2>Work With Us</h2>
+      <ul class="join-list">
+        {joinOptions.map(({ title, short, label, href }) => (
+          <li>
+            <h3>{title}</h3>
+            <p>{short}</p>
+            <a class="text-link" href={href}>
+              {label} <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Base>
+
+<style>
+  /* Closing sheet: full-strength yellow paper with a scissor-cut top edge. */
+  .join-sheet {
+    margin-top: 96px;
+    background: var(--yellow);
+    color: var(--ink);
+    clip-path: polygon(
+      0 18px,
+      6% 6px,
+      12% 16px,
+      19% 4px,
+      26% 14px,
+      33% 3px,
+      40% 15px,
+      47% 5px,
+      54% 17px,
+      61% 4px,
+      68% 14px,
+      75% 6px,
+      82% 18px,
+      89% 4px,
+      95% 13px,
+      100% 5px,
+      100% 100%,
+      0 100%
+    );
+  }
+  .join-inner {
+    padding-block: 112px 88px;
+    display: grid;
+    gap: 48px;
+  }
+  .join-sheet h2 {
+    font-size: clamp(3.2rem, 9vw, 8.6rem);
+    line-height: 0.85;
+  }
+  .join-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .join-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+  }
+  .join-list h3 {
+    font-size: 1.35rem;
+  }
+  .join-list p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .join-list .text-link {
+    margin-top: auto;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  @media (max-width: 1000px) {
+    .join-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .join-list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .join-inner {
+      padding-block: 80px 64px;
+    }
+  }
+</style>

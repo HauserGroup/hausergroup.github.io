@@ -237,14 +237,20 @@ code {
   gap: 24px;
   padding-block: 20px;
 }
+/* Header: the logo, four links and the UCPH button. Everything else lives in
+   the footer. */
+.top {
+  position: relative;
+  z-index: 6;
+}
 .mark {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 16px;
-  letter-spacing: -0.02em;
+  font-size: 22px;
+  letter-spacing: -0.03em;
 }
 .top-right {
   display: flex;
@@ -254,7 +260,7 @@ code {
 .top nav {
   display: flex;
   gap: 26px;
-  font-size: 15px;
+  font-size: 16px;
 }
 .top nav a {
   text-decoration: none;
@@ -263,55 +269,156 @@ code {
 .top nav a:hover {
   color: var(--ink);
 }
+.top nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
 .foot {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   padding-block: 16px 40px;
 }
+.foot nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.top nav a {
+  white-space: nowrap;
+}
+/* Narrow screens: logo and button on the first row, the links below. */
+@media (max-width: 860px) {
+  .top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 14px;
+  }
+  .top-right {
+    display: contents;
+  }
+  .top nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+@media (max-width: 480px) {
+  .mark {
+    font-size: 19px;
+  }
+  .top nav {
+    gap: 14px;
+    font-size: 14px;
+  }
+  .top-right > .btn {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+}
 
-/* Hero. */
+/* Cut-paper bits, used sparingly: a paper highlight behind one word,
+   a sticker, and a strip of tape. */
+mark.paper {
+  position: relative;
+  z-index: 0;
+  padding: 0 0.06em;
+  background: none;
+  color: var(--on, #fff);
+}
+mark.paper::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.12em -0.04em -0.02em;
+  background: var(--c, var(--red));
+  transform: rotate(var(--tilt, -1.5deg));
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.12);
+}
+mark.paper.y {
+  --on: var(--ink);
+}
+.tape {
+  position: absolute;
+  width: 76px;
+  height: 24px;
+  background: rgb(255 255 255 / 0.55);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.08);
+  pointer-events: none;
+}
+
+/* Hero: the receptor animation, with one post-it stuck to its corner. */
 .hero {
-  padding-block: 8px 20px;
+  padding-block: 8px 0;
 }
 .sky {
-  overflow: hidden;
-  padding: 56px 32px 40px;
+  padding: 56px 32px 72px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
-.sky svg {
-  width: min(500px, 86%);
-  height: auto;
+.sim {
+  position: relative;
+  width: min(650px, 100%);
+}
+.hero .sim .particle-hero {
+  width: 100%;
+}
+/* In the hero the dots sit behind the animation and fade out toward the text. */
+.sky.dots::before {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgb(0 0 0 / 0.35) 40%,
+    transparent 70%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgb(0 0 0 / 0.35) 40%,
+    transparent 70%
+  );
+}
+.sticker {
+  position: absolute;
+  z-index: 2;
+  top: -34px;
+  right: -52px;
+  width: 172px;
+  padding: 18px 16px 14px;
+  background: var(--yellow);
+  color: var(--ink);
+  font: 500 14px/1.3 var(--f-sans);
+  transform: rotate(6deg);
+  box-shadow:
+    0 2px 0 rgb(0 0 0 / 0.08),
+    0 10px 18px rgb(0 0 0 / 0.14);
+}
+.sticker b {
   display: block;
+  font: 500 54px/0.9 var(--f-sans);
+  letter-spacing: -0.05em;
+  padding-bottom: 6px;
+}
+.sticker .tape {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
 }
 .sky h1 {
   text-align: center;
-  max-width: 12ch;
+  max-width: 13ch;
 }
-.sky .w1 {
-  position: absolute;
-  left: 32px;
-  top: 40px;
-  width: 260px;
-}
-.sky .w2 {
-  position: absolute;
-  right: 32px;
-  top: 120px;
-  width: 230px;
-}
-.w2 b {
-  display: block;
-  font: 500 56px/1 var(--f-sans);
-  letter-spacing: -0.05em;
-  color: var(--red);
-}
-.hero .cap {
-  padding-top: 12px;
+.hero-lead {
+  max-width: 36rem;
+  margin-top: -12px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--ink-2);
 }
 
 /* Section heads. */
@@ -346,7 +453,7 @@ code {
 
 /* Scales. */
 .scales {
-  padding-block: 40px 140px;
+  padding-block: 120px 40px;
 }
 .seq {
   display: flex;
@@ -386,130 +493,47 @@ code {
 .res.swap small {
   color: var(--red);
 }
-.seq-cap {
-  padding-bottom: 56px;
+/* Software: two compact cards, side by side. */
+.software {
+  padding-block: 120px 40px;
 }
-.wins {
+.tools {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
-.wins .win-bar {
-  --bar: var(--c);
-  color: var(--fg, #fff);
-}
-.wins .y .win-bar {
-  --fg: var(--ink);
-}
-.wins .win-bar i {
-  margin-left: auto;
-  width: 11px;
-  height: 11px;
-  background: currentColor;
-}
-.wins .r .win-bar i {
-  border-radius: 50%;
-}
-.wins .y .win-bar i {
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-.wins .g .win-bar i {
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-}
-.wins .win-body {
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.wins .win-body span {
-  color: var(--ink-2);
-  font-size: 11px;
-}
-
-/* Research. */
-.research {
-  background: var(--white);
-  padding-block: 140px;
-}
-.works {
+.tool {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px 28px;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding-top: 22px;
+  border-top: 2px solid var(--ink);
 }
-.work {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-.tile {
-  aspect-ratio: 4/5;
-  max-width: 100%;
+.tool-icon {
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
   overflow: hidden;
 }
-.tile .obj {
-  width: 46%;
-  aspect-ratio: 1/1;
-  background: var(--c);
-  box-shadow: 4px 6px 0 rgb(0 0 0 / 0.12);
-}
-.work p {
-  color: var(--ink-2);
-  font-size: 16px;
-  max-width: 30rem;
-}
-.reach {
-  font: 500 11.5px/1 var(--f-mono);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 12px;
-  color: #b5b4b0;
-}
-.reach .on {
-  color: var(--ink);
-}
-
-/* Software. */
-.software {
-  padding-block: 140px 40px;
-}
-.tools {
-  display: flex;
-  flex-direction: column;
-  gap: 72px;
-}
-.tool {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: 28px 56px;
-  align-items: center;
-}
-.tool .tile {
-  aspect-ratio: 4/3;
-}
-.tool .tile svg {
-  width: 78%;
+.tool-icon svg {
+  width: 90%;
   height: auto;
   display: block;
 }
 .tool-text {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
   align-items: flex-start;
   min-width: 0;
 }
 .tool-text h3 {
-  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
 }
 .tool-text p {
   color: var(--ink-2);
-  max-width: 34rem;
+  font-size: 16px;
 }
 .facts {
   font: 500 12px/1 var(--f-mono);
@@ -580,47 +604,30 @@ code {
 }
 
 @media (max-width: 1000px) {
-  .sky .w1,
-  .sky .w2 {
-    position: static;
-    width: 100%;
-    max-width: 420px;
-  }
   .sky {
-    padding: 32px 18px 32px;
+    padding: 40px 18px 64px;
   }
-  .wins {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .works {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  .tools {
+    grid-template-columns: minmax(0, 1fr);
   }
   .crew {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .head,
-  .panel,
-  .tool {
+  .panel {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 640px) {
-  .top nav {
-    display: none;
-  }
   .top .btn {
     padding: 11px 13px;
     font-size: 14px;
-  }
-  .wins,
-  .works {
-    grid-template-columns: minmax(0, 1fr);
   }
   .crew {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .mission,
-  .research,
+  .scales,
   .people {
     padding-block: 96px;
   }
@@ -630,6 +637,20 @@ code {
   .panel {
     padding: 48px 18px 24px;
     min-height: 0;
+  }
+  .sticker {
+    top: -40px;
+    right: -6px;
+    width: 140px;
+    padding: 14px 12px 12px;
+    font-size: 13px;
+  }
+  .sticker b {
+    font-size: 40px;
+  }
+  .tool {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 16px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -641,166 +662,7 @@ code {
   }
 }
 
-/* Category navigation */
-.top {
-  position: relative;
-  z-index: 6;
-}
-.top-right {
-  gap: clamp(14px, 2.1vw, 32px);
-}
-.top .desktop-nav {
-  gap: clamp(12px, 1.5vw, 25px);
-}
-.top a[aria-current="page"] {
-  color: var(--blue);
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-.site-menu {
-  display: block;
-}
-.site-menu summary {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  font-weight: 600;
-  list-style: none;
-}
-.site-menu summary::-webkit-details-marker {
-  display: none;
-}
-.site-menu nav {
-  position: absolute;
-  right: 20px;
-  top: calc(100% - 5px);
-  z-index: 5;
-  width: min(420px, calc(100% - 40px));
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  background: var(--white);
-  border: 1.5px solid var(--ink);
-  box-shadow: 3px 3px var(--ink);
-  padding: 10px;
-}
-.site-menu nav a {
-  padding: 10px 12px;
-}
-.site-menu nav a:hover {
-  background: var(--blue-t);
-}
-.foot nav {
-  display: flex;
-  gap: 20px;
-}
-.foot {
-  align-items: center;
-}
-@media (max-width: 1130px) {
-  .top {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    row-gap: 8px;
-  }
-  .top-right {
-    display: contents;
-  }
-  .top .desktop-nav {
-    display: flex;
-    grid-area: 2 / 1 / 3 / -1;
-    flex-wrap: wrap;
-    column-gap: clamp(14px, 3vw, 32px);
-    row-gap: 0;
-    border-top: 1px solid var(--line);
-    padding-top: 5px;
-  }
-  .desktop-nav a {
-    padding: 5px 0;
-  }
-  .top .site-menu nav {
-    display: grid;
-    right: 20px;
-    top: 58px;
-  }
-}
-@media (max-width: 560px) {
-  .top {
-    grid-template-columns: 1fr auto;
-    padding-block: 8px;
-  }
-  .top .desktop-nav {
-    column-gap: 17px;
-    font-size: 14px;
-  }
-  .top-right > .btn {
-    display: none;
-  }
-}
-@media (min-width: 1001px) and (max-width: 1200px) {
-  .sky .w1,
-  .sky .w2 {
-    position: static;
-    width: 100%;
-    max-width: 420px;
-  }
-}
-@media (max-width: 1200px) {
-  .sky {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 20px;
-    padding: clamp(15px, 3vw, 32px);
-  }
-  .sky .w1,
-  .sky .w2 {
-    align-self: start;
-    width: 100%;
-    max-width: none;
-  }
-  .sky > .particle-hero {
-    grid-row: 1;
-    grid-column: 1/-1;
-    justify-self: center;
-  }
-  .sky > h1 {
-    grid-row: 2;
-    grid-column: 1/-1;
-    justify-self: center;
-  }
-  .sky > .win {
-    position: relative;
-    inset: auto;
-    grid-row: 3;
-  }
-}
-@media (max-width: 580px) {
-  .sky {
-    column-gap: 10px;
-  }
-  .sky .win-body {
-    padding: 8px;
-    font-size: 11px;
-  }
-  .sky .win-bar {
-    height: 20px;
-  }
-  .sky .w2 b {
-    font-size: 34px;
-  }
-}
-.research-icon {
-  width: 78%;
-  max-height: 82%;
-  filter: drop-shadow(3px 5px 0 rgb(23 23 26 / 0.1));
-}
-.work .tile {
-  aspect-ratio: 6/5;
-}
-.category-content > .research,
+.category-content > .scales,
 .category-content > .software,
 .category-content > .mission {
   padding-top: clamp(44px, 7vw, 95px);
@@ -811,25 +673,6 @@ code {
 }
 .about-title {
   margin-bottom: 38px;
-}
-.model-intro {
-  border-top: 2px solid var(--ink);
-  padding-top: 20px;
-  margin-bottom: 36px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 24px;
-}
-.model-intro h2 {
-  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
-}
-.model-intro p {
-  max-width: 65ch;
-}
-.work .model-question {
-  color: var(--ink);
-  border-left: 3px solid var(--ink);
-  padding-left: 12px;
 }
 .directory-page {
   min-height: 70vh;
@@ -919,8 +762,7 @@ code {
 }
 @media (max-width: 700px) {
   .directory-heading,
-  .option-grid,
-  .model-intro {
+  .option-grid {
     grid-template-columns: 1fr;
   }
   .paper-list a {

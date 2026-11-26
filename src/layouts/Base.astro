@@ -8,16 +8,17 @@ interface Props {
   description?: string;
 }
 
+// Keep the header short: the homepage tells the story, the rest is in the footer.
 const mainLinks = [
-  ["About", "/about/"],
-  ["Research", "/research/"],
+  ["Research", "/#research"],
   ["Publications", "/publications/"],
-  ["Software", "/software/"],
   ["People", "/people/"],
   ["Join us", "/opportunities/"],
-  ["Contact", "/contact/"],
 ];
 const moreLinks = [
+  ["About", "/about/"],
+  ["Software", "/software/"],
+  ["Contact", "/contact/"],
   ["News", "/news/"],
   ["Alumni", "/alumni/"],
   ["Services", "/services/"],
@@ -53,29 +54,17 @@ const {
 
     <header class="wrap top">
       <a class="mark" href="/">
-        <Logo />
+        <Logo width={48} />
         Hauser Group
       </a>
       <div class="top-right">
-        <nav class="desktop-nav" aria-label="Main">
+        <nav aria-label="Main">
           {mainLinks.map(([label, href]) => (
             <a href={href} aria-current={active(href)}>
               {label}
             </a>
           ))}
         </nav>
-        <details class="site-menu">
-          <summary>
-            More <span aria-hidden="true">⌄</span>
-          </summary>
-          <nav aria-label="More categories">
-            {moreLinks.map(([label, href]) => (
-              <a href={href} aria-current={active(href)}>
-                {label}
-              </a>
-            ))}
-          </nav>
-        </details>
         <a class="btn" href={GROUP_PAGE}>
           Group page at UCPH{" "}
           <span class="arr" aria-hidden="true">

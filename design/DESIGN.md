@@ -26,6 +26,45 @@ The calm, white, one-color-at-a-time treatment was inspired by
 Case type, lots of white space, halftone fields and small retro software
 windows.
 
+## Whimsy, in small doses
+
+Calm is the base, but a page with only straight, pale boxes feels like a
+template. A few hand-placed paper moments keep it playful. Use only these, and
+only where listed:
+
+- **Paper highlight** (`mark.paper`): one word in a heading on a tilted sheet of
+  primary paper. One per page at most (the hero's "Differently").
+- **Post-it** (`.sticker`): the yellow 34% note stuck on the corner of the
+  receptor animation.
+- **The statement sheet**: a flat white sheet laid across the bottom of the hero.
+- **Tilted backing paper**: each portrait is pasted on a sheet of its person's
+  color, slightly askew; it straightens on hover.
+- **The lifted brick**: the swapped residue in the research section.
+- **One full-strength sheet**: the yellow "Work With Us" sheet with a
+  scissor-cut top edge closes the page.
+
+Tilts stay between 1° and 6°. Nothing animates except the receptor and the
+button press.
+
+**One material.** Everything is flat cut paper: solid color or white, square
+corners, a short hard shadow. No realistic textures, ruled lines, rubber
+stamps or curled corners, and no mixing in other materials. When adding
+something new, build it from the same parts rather than inventing a new look.
+
+## How the homepage tells the story
+
+- **Tell it on the page.** The homepage carries the whole story (what we study,
+  how, what we have published, what we build, who we are, how to join), so
+  readers don't need to click through. Avoid "see more" or "all …" links where
+  the homepage can show the thing itself; the header nav covers the subpages.
+- **Few captions.** Don't label things that explain themselves. No eyebrows over
+  headings, no "open source · Rust" lines over names, no notes under drawings.
+  A short tag (`.facts`) is fine when it carries information.
+- **Order**: hero → statement → research → latest papers → software → people →
+  work with us.
+- **Short header.** The logo, four links (Research, Publications, People, Join
+  us) and the UCPH button. Every other page is linked from the footer.
+
 ## Color
 
 | Token      | Hex       | Scale     | Shape    | Use                                    |
@@ -45,9 +84,9 @@ set both `--c` (the primary) and `--t` (its tint) on any element.
 
 Rules:
 
-- **One primary per view.** A section gets one colored field with one cut-paper
-  object on it. The receptor drawing and the four scale windows are the only
-  places where all four appear together, because they show the whole system.
+- **One primary per view.** A section gets one colored field or sheet. The
+  receptor, the four scales and the people's backing sheets are the places
+  where all four appear together, because they show the whole system.
 - **Color is meaning, not status.** Never use red for errors or green for
   success. Red is the in vitro scale and the variant; it is not a warning.
 - **Yellow is never text on white** (1.6:1 contrast). Use it as a fill with ink
@@ -67,31 +106,46 @@ Rules:
 - Headings are big and medium weight, never bold. Size comes from `clamp()` so
   they scale with the viewport.
 - Section headings use Title Case. Body text and captions use sentence case.
-- Captions are 13 px in `--ink-2`. The one caption under the hero is red.
+- Captions are 13 px in `--ink-2`, and rare (see "Few captions").
 
 ## Components
 
 **Halftone field (`.dots`)**: a pale tint with a 10 px grid of dots in the
-primary, fading out toward the top. Used for the hero, research tiles, software
-tiles, people portraits and closing panels.
+primary, fading out toward the top. In the hero it fades downward instead, so
+the dots sit behind the animation and the text below stays clean. Used for the
+hero, software icons and closing panels.
 
-**Window (`.win`)**: white body, 1.5 px ink border, 3 px hard ink shadow, a
-title bar with a close box and striped lines. Holds short facts and asides
-(mission, 34%, join). The four scale windows replace the stripes with a solid
-primary title bar and their shape.
+**Hero**: the particle receptor sits directly on the halftone field, with no
+frame around it. Nothing floats over it except the post-it.
+
+**Statement** (`src/components/Statement.astro`): the group leader's words on a
+flat white sheet with the standard cut-paper shadow, tilted 1°, overlapping
+the bottom of the hero. The text lives in `statement` in `src/data/site.ts`
+and must be Alex's own words. While it is empty, a marked draft shows in
+`npm run dev` (or a build with `PUBLIC_SHOW_DRAFTS=1`) and nothing appears on
+the published site.
+
+**From One Residue To One Patient** (`src/components/Scales.astro`): the
+research section, on the homepage and on /research. The residue bricks show a
+variant; below them, the four scales in four columns under a 2 px ink rule.
+Each column is the scale's shape in full color, its name, what we do at that
+scale, and one concrete example in grey. The examples carry what used to be
+the separate "lines of work" (peptide–receptor pairs, assays, biobanks and
+registries, the variant platform). The text lives in `scales` in
+`src/data/site.ts`.
+
+**Software** (`.tool`): two compact entries side by side under a 2 px ink
+rule, like the scales and the join list. Each is a small halftone icon, the
+name, one sentence, a couple of tags and a button. No boxes.
 
 **Button (`.btn`)**: a brick. Solid primary fill, 1.5 px ink border, 3 px hard
 ink shadow. On press it moves 3 px down and right and the shadow disappears, so
 it seats like a brick clicking into place. Blue is the default; `.btn.y` is
-yellow with ink text; `.btn.lg` is the larger size for software calls to
-action. External links end in `↗`.
-
-**Cut-paper object (`.tile .obj`)**: one flat shape in the primary, with a
-4 × 6 px hard shadow. Shapes used so far: half disc, leaf, circle.
+yellow with ink text. External links end in `↗`.
 
 **Residue bricks (`.res`)**: monospaced amino-acid letters in outlined boxes
 with Ballesteros–Weinstein numbers below. The variant is red, lifted and
-rotated.
+rotated. No caption: they name no receptor, so they make no claim.
 
 ## Layout and spacing
 
@@ -105,13 +159,13 @@ rotated.
 
 ## Content rules
 
-- **People**: names and titles only. No phone numbers or email addresses on this
-  site; people are reached through the
-  [department's group page](https://drug.ku.dk/research-sections/pharmaceutical-informatics/pharmacoinformatics/),
-  which is linked from the header and the join panel. Portraits are initials on
-  a halftone field until we decide on photos.
-- **The residue row is illustrative**, and the page says so. It is not a claim
-  about a specific receptor variant.
+- **People**: names, titles and photos only. No phone numbers or email
+  addresses in the people section. The "Work With Us" options link to the job
+  portal and to email enquiries with a subject line.
+- **The residue row is illustrative.** It names no receptor, so it makes no
+  claim about a specific variant, and it carries no caption.
+- **The statement is Alex's own words.** Never publish placeholder or drafted
+  text under his name.
 - **The 34% figure** (share of approved drugs acting on a GPCR) comes from
   Hauser et al., _Nature Reviews Drug Discovery_, 2017.
 - Keep copy plain and short: what the work is and why it matters, in a sentence
@@ -121,7 +175,8 @@ rotated.
 
 | To change…                | Edit                            |
 | ------------------------- | ------------------------------- |
-| People, research, scales  | `src/data/site.ts`              |
+| Scales, join, statement   | `src/data/site.ts`              |
+| People                    | `src/data/profiles.ts`          |
 | Colors, type, spacing     | `src/styles/site.css` (`:root`) |
 | Header, footer, page head | `src/layouts/Base.astro`        |
 | Sections and software     | `src/pages/index.astro`         |
@@ -131,5 +186,4 @@ rotated.
 
 - **Fonts are loaded from Google Fonts**, which sends visitors' IP addresses to
   Google. Self-hosting them (for example with Fontsource) would avoid that.
-- Photos instead of initials for people.
-- A publications section.
+- Alex's statement: wording, and whether to add a scanned signature.

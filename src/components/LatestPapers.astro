@@ -11,12 +11,7 @@ const dateLabel = (value: string) =>
 
 <section class="wrap latest-papers g" aria-labelledby="latest-papers-title">
   <div class="latest-heading">
-    <div>
-      <h2 id="latest-papers-title">Latest papers</h2>
-    </div>
-    <a class="text-link" href="/publications/">
-      All publications →
-    </a>
+    <h2 id="latest-papers-title">Latest Papers</h2>
   </div>
   <ol class="latest-list">
     {latestPapers.map((paper) => (
@@ -45,28 +40,10 @@ const dateLabel = (value: string) =>
 
 <style>
   .latest-papers {
-    padding-top: 72px;
-    padding-bottom: 68px;
+    padding-block: 120px 40px;
   }
   .latest-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 24px;
-    margin-bottom: 26px;
-  }
-  .eyebrow {
-    margin: 0 0 10px;
-    font: 500 11px/1.5 var(--f-mono);
-    letter-spacing: 0.06em;
-  }
-  h2 {
-    margin: 0;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.05;
-  }
-  .latest-heading > a {
-    flex-shrink: 0;
+    margin-bottom: 48px;
   }
   .latest-list {
     list-style: none;
@@ -116,8 +93,7 @@ const dateLabel = (value: string) =>
   }
   @media (max-width: 700px) {
     .latest-papers {
-      padding-top: 48px;
-      padding-bottom: 46px;
+      padding-block: 88px 24px;
     }
     .latest-heading {
       align-items: start;

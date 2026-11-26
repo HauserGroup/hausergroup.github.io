@@ -1,5 +1,10 @@
 ---
+// From one residue to one patient: a variant drawn as a swapped brick, then
+// the four scales the group follows it through.
 import { scales } from "../data/site";
+
+const { standalone = false } = Astro.props;
+const Heading = standalone ? "h1" : "h2";
 const sequence = [
   { aa: "I", pos: "3.46" },
   { aa: "A", pos: "3.47" },
@@ -12,13 +17,18 @@ const sequence = [
 ];
 ---
 
-<section class="wrap scales">
+<section class="wrap scales" id="research">
   <div class="head">
-    <h2>From One Residue To One Patient</h2>
+    <Heading>From One Residue To One Patient</Heading>
+    <p>
+      A single swapped amino acid can change how well a drug works, or which
+      pathway it switches on. We follow that change across four scales.
+    </p>
   </div>
   <div
     class="seq"
-    aria-label="Illustrative stretch of helix 3 with one residue replaced by a variant"
+    role="img"
+    aria-label="A stretch of receptor helix 3 drawn as bricks, with one residue swapped for a variant"
   >
     {sequence.map((r) => (
       <div class:list={["res", { swap: r.swap }]}>
@@ -27,18 +37,80 @@ const sequence = [
       </div>
     ))}
   </div>
-  <p class="cap seq-cap">
-    Helix 3 around the DRY motif. Illustrative sequence.
-  </p>
-  <div class="wins">
+  <ol class="scale-list">
     {scales.map((s) => (
-      <div class:list={["win", s.color]}>
-        <div class="win-bar">
-          {s.id}
-          <i />
-        </div>
-        <div class="win-body">{s.text}</div>
-      </div>
+      <li class={s.color}>
+        <i class="shape" aria-hidden="true"></i>
+        <h3>{s.name}</h3>
+        <p>{s.text}</p>
+        <p class="example">{s.example}</p>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>
+
+<style>
+  .seq {
+    padding-bottom: 64px;
+  }
+  /* Four columns under an ink rule, like the rest of the page. Each scale
+     keeps its color and shape: blue square, red circle, yellow triangle,
+     green diamond. */
+  .scale-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+  }
+  .shape {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 6px;
+    background: var(--c);
+    filter: drop-shadow(3px 4px 0 rgb(0 0 0 / 0.14));
+  }
+  .r .shape {
+    border-radius: 50%;
+  }
+  .y .shape {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+  .g .shape {
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+  h3 {
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  }
+  li p {
+    font-size: 17px;
+    line-height: 1.45;
+  }
+  .example {
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+  @media (max-width: 1000px) {
+    .scale-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 40px;
+    }
+  }
+  @media (max-width: 560px) {
+    .scale-list {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .seq {
+      padding-bottom: 48px;
+    }
+  }
+</style>
