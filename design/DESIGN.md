@@ -114,6 +114,10 @@ Rules:
   echo the cut paper. It also sets paper titles on `/publications/`. It covers
   Greek, so titles with `β`, `µ` or `κ` stay in one face; check Greek coverage
   before swapping in any other heading font.
+- All three faces are self-hosted from npm (Fontsource) and imported at the top
+  of `src/layouts/Base.astro`, so visitors make no requests to Google. The
+  variable faces are named `"Geologica Variable"` and `"Inter Tight Variable"`
+  in CSS.
 
 ## Components
 
