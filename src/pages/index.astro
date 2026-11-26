@@ -11,7 +11,7 @@ import { joinOptions } from "../data/site";
 
 <Base>
   <section class="wrap hero">
-    <div class="sky dots b">
+    <div class="sky dots b cut-bottom">
       <div class="sim">
         <ParticleReceptor />
         <p class="sticker">
@@ -20,10 +20,7 @@ import { joinOptions } from "../data/site";
           of approved drugs act on a G protein-coupled receptor.
         </p>
       </div>
-      <h1>
-        Every Genome Reads The Same Drug{" "}
-        <mark class="paper r">Differently</mark>
-      </h1>
+      <h1>Every Genome Reads The Same Drug Differently</h1>
       <p class="hero-lead">
         At the University of Copenhagen we combine genomics, structural biology,
         pharmacology and health-care data to learn how human genetic variation
@@ -42,7 +39,7 @@ import { joinOptions } from "../data/site";
 
   <PeopleSection />
 
-  <section class="join-sheet dots y" id="join">
+  <section class="join-sheet dots y cut-top" id="join">
     <div class="wrap join-inner">
       <h2>Work With Us</h2>
       <ul class="join-list">
@@ -61,33 +58,12 @@ import { joinOptions } from "../data/site";
 </Base>
 
 <style>
-  /* Closing sheet with a scissor-cut top edge, in the hero's halftone
-     texture but yellow. The dots are densest at the bottom, mirroring the
-     hero. */
+  /* Closing sheet with a cut top edge, in the hero's halftone texture but
+     yellow. The dots are densest at the bottom, mirroring the hero. */
   .join-sheet {
     margin-top: 96px;
     background: var(--t);
     color: var(--ink);
-    clip-path: polygon(
-      0 18px,
-      6% 6px,
-      12% 16px,
-      19% 4px,
-      26% 14px,
-      33% 3px,
-      40% 15px,
-      47% 5px,
-      54% 17px,
-      61% 4px,
-      68% 14px,
-      75% 6px,
-      82% 18px,
-      89% 4px,
-      95% 13px,
-      100% 5px,
-      100% 100%,
-      0 100%
-    );
   }
   .join-inner {
     padding-block: 112px 88px;

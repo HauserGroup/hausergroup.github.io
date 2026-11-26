@@ -32,16 +32,18 @@ Calm is the base, but a page with only straight, pale boxes feels like a
 template. A few hand-placed paper moments keep it playful. Use only these, and
 only where listed:
 
-- **Paper highlight** (`mark.paper`): one word in a heading on a tilted sheet of
-  primary paper. One per page at most (the hero's "Differently").
 - **Post-it** (`.sticker`): the yellow 34% note stuck on the corner of the
   receptor animation.
 - **The statement sheet**: a flat white sheet laid across the bottom of the hero.
 - **Tilted backing paper**: each portrait is pasted on a sheet of its person's
   color, slightly askew; it straightens on hover.
 - **The lifted brick**: the swapped residue in the research section.
-- **One full-strength sheet**: the yellow "Work With Us" sheet with a
-  scissor-cut top edge closes the page.
+- **Matching cut edges** (`.cut-bottom`, `.cut-top`): the blue hero's bottom
+  edge and the yellow "Work With Us" sheet's top edge are cut with the same
+  uneven line, so the page opens and closes on matching paper.
+
+Headings stay plain: no colored highlights behind words. A full-strength red
+block in the headline was too loud.
 
 Tilts stay between 1° and 6°. Nothing animates except the receptor and the
 button press.
@@ -116,7 +118,8 @@ the dots sit behind the animation and the text below stays clean. Used for the
 hero, software icons and closing panels.
 
 **Hero**: the particle receptor sits directly on the halftone field, with no
-frame around it. Nothing floats over it except the post-it.
+frame around it, inside a soft circular glow that fades out before the edge
+of its box. Nothing floats over it except the post-it.
 
 **Statement** (`src/components/Statement.astro`): the group leader's words on a
 flat white sheet with the standard cut-paper shadow, tilted 1°, overlapping

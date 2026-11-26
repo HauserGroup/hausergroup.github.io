@@ -43,11 +43,13 @@ const scenes = ["Genomics", "Structure", "Pharmacology", "Health care"];
   .particle-stage {
     position: relative;
     aspect-ratio: 1.15;
+    /* A circular glow that fades out fully before the edge of the box, so no
+       rectangle shows against the halftone dots. */
     background: radial-gradient(
-      ellipse at center,
-      var(--bg) 48%,
-      var(--blue-t) 72%,
-      transparent 96%
+      circle closest-side at center,
+      var(--bg) 55%,
+      color-mix(in srgb, var(--bg) 55%, transparent) 78%,
+      transparent 100%
     );
     isolation: isolate;
   }
@@ -72,6 +74,17 @@ const scenes = ["Genomics", "Structure", "Pharmacology", "Health care"];
     visibility: hidden;
     touch-action: pan-y;
     cursor: crosshair;
+    /* Fade stray particles out in a circle, so none stop at a straight edge. */
+    -webkit-mask-image: radial-gradient(
+      circle closest-side,
+      #000 72%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle closest-side,
+      #000 72%,
+      transparent 100%
+    );
   }
   .particle-controls {
     display: none;
